@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover">
+  <title>Assistant Home</title>
+  <script src="https://telegram.org/js/telegram-web-app.js"></script>
+  <style>
+    :root {
+      --bg: #121018; --card: #1e1a28; --border: rgba(180, 140, 255, 0.25);
+      --accent: #b388ff; --text: #f5f0ff; --muted: #9a8fb0; --off: #5c5470;
+    }
+    * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+    body { margin: 0; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      background: var(--bg); color: var(--text); min-height: 100vh; }
+    .hidden { display: none !important; }
+    .wrap { max-width: 480px; margin: 0 auto; padding: 12px 16px 32px; padding-top: max(12px, env(safe-area-inset-top)); }
+    h1 { margin: 0; font-size: 24px; }
+    .sub { color: var(--muted); font-size: 13px; margin-top: 6px; }
+    .card {
+      display: flex; align-items: center; gap: 14px; width: 100%; margin: 10px 0; padding: 14px 16px;
+      border: 1px solid var(--border); border-radius: 14px; background: var(--card); color: var(--text);
+      text-align: left; cursor: pointer; font-size: 16px;
+    }
+    .ico { font-size: 28px; width: 36px; text-align: center; }
+    .row-body { flex: 1; min-width: 0; }
+    .row-title { font-weight: 600; }
+    .row-meta { font-size: 12px; color: var(--muted); margin-top: 4px; }
+    .toggle {
+      width: 52px; height: 30px; border-radius: 999px; border: none; flex-shrink: 0;
+      background: var(--off); position: relative;
+    }
+    .toggle.on { background: var(--accent); }
+    .toggle::after {
+      content: ''; position: absolute; top: 3px; left: 3px; width: 24px; height: 24px;
+      border-radius: 50%; background: #fff; transition: transform .2s;
+    }
+    .toggle.on::after { transform: translateX(22px); }
+    .back { background: none; border: none; color: var(--accent); font-size: 15px; padding: 8px 0; cursor: pointer; }
+    .sec { font-size: 11px; letter-spacing: .1em; text-transform: uppercase; color: var(--accent); margin: 20px 0 8px; }
+    .pin-dots { font-size: 28px; letter-spacing: 8px; text-align: center; margin: 16px 0; }
+    .pin-pad { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; max-width: 280px; margin: 0 auto; }
+    .pin-pad button { padding: 16px; font-size: 20px; border-radius: 12px; border: 1px solid var(--border);
+      background: var(--card); color: var(--text); cursor: pointer; }
+    .pin-pad button.ok { background: var(--accent); color: #1a1028; font-weight: 700; }
+    .err { color: #ff8a80; font-size: 13px; text-align: center; margin-top: 10px; }
+    .gate { text-align: center; padding: 40px 16px; color: var(--muted); }
+  </style>
+</head>
+<body>
+<div id="gate" class="gate hidden"><p id="gate-msg">Откройте приложение из Telegram-бота</p></div>
+<div id="pin-screen" class="wrap hidden">
+  <h1>PIN</h1>
+  <p class="sub">Для переключателей и автоматизаций</p>
+  <div class="pin-dots" id="pin-dots">—</div>
+  <div class="pin-pad" id="pin-pad"></div>
+  <p class="err" id="pin-err"></p>
+</div>
+<div id="app" class="wrap hidden">
+  <div id="view-home">
+    <h1>🏠 <span style="color:var(--accent)">Дом</span></h1>
+    <p class="sub" id="user-line">…</p>
+    <div class="sec">Комнаты</div>
+    <div id="rooms-list"></div>
+  </div>
+  <div id="view-room" class="hidden">
+    <button type="button" class="back" id="btn-back">← Назад</button>
+    <h1 id="room-title">Комната</h1>
+    <div class="sec">Устройства</div>
+    <div id="entities-list"></div>
+    <div class="sec">Автоматизации</div>
+    <div id="autos-list"></div>
+  </div>
+</div>
+<script>
+(function(){
+  const tg = window.Telegram?.WebApp;
+  if (tg) { tg.ready(); tg.expand(); tg.setHeaderColor('#121018'); tg.setBackgroundColor('#121018'); }
+  let sessionToken = '', pinEntry = '', pinRequired = true;
+  const bootstrap = new URLSearchParams(location.search).get('b') || '';
+  const pathBase = (function(){
+    const p = location.pathname || '';
+    const i = p.indexOf('/tg/app');
+    return i > 0 ? p.slice(0, i) : '';
+  })();
+  const apiBase = location.origin + pathBase + '/api/tg';
+  function initData(){ return tg?.initData || ''; }
+  function authBody(extra){ return Object.assign({}, extra||{}, initData() ? {init_data: initData()} : {}, bootstrap ? {bootstrap} : {}); }
+  function hdr(){
+    const h = {'Content-Type':'application/json'};
+    if (initData()) h['X-Telegram-Init-Data'] = initData();
+    if (sessionToken) h['X-TG-Session'] = sessionToken;
+    return h;
+  }
+  async function api(path, opts){
+    const r = await fetch(location.origin + '/api/tg' + path, {...opts, headers: {...hdr(), ...(opts?.headers||{})}});
+    const j = await r.json().catch(() => ({}));
+    if (!r.ok) throw new Error(j.detail || r.statusText);
+    return j;
+  }
+  function esc(s){ return String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;'); }
+  function showGate(on, msg){
+    document.getElementById('gate').classList.toggle('hidden', !on);
+    document.getElementById('pin-screen').classList.add('hidden');
+    document.getElementById('app').classList.toggle('hidden', on);
+    if (msg) document.getElementById('gate-msg').textContent = msg;
+  }
+  function showPin(on){
+    document.getElementById('gate').classList.add('hidden');
+    document.getElementById('pin-screen').classList.toggle('hidden', !on);
+    document.getElementById('app').classList.toggle('hidden', on);
+  }
+  function renderPinPad(){
+    const pad = document.getElementById('pin-pad');
+    pad.innerHTML = '';
+    ['1','2','3','4','5','6','7','8','9','⌫','0','OK'].forEach(k => {
+      const b = document.createElement('button');
+      b.type = 'button'; b.textContent = k;
+      if (k === 'OK') b.className = 'ok';
+      b.onclick = () => {
+        if (k === '⌫') pinEntry = pinEntry.slice(0,-1);
+        else if (k === 'OK') submitPin();
+        else if (pinEntry.length < 8) pinEntry += k;
+        document.getElementById('pin-dots').textContent = '•'.repeat(pinEntry.length) || '—';
+      };
+      pad.appendChild(b);
+    });
+  }
+  async function submitPin(){
+    try {
+      const j = await api('/auth', { method:'POST', body: JSON.stringify(authBody({ pin: pinEntry })) });
+      sessionToken = j.session_token || '';
+      pinEntry = '';
+      showPin(false);
+      await loadHome();
+    } catch(e) {
+      document.getElementById('pin-err').textContent = '❌ ' + e.message;
+      pinEntry = '';
+    }
+  }
+  async function boot(){
+    if (!initData() && !bootstrap) { showGate(true); return; }
+    try {
+      const j = await api('/auth', { method:'POST', body: JSON.stringify(authBody()) });
+      sessionToken = j.session_token || '';
+      pinRequired = !!j.pin_required;
+      const me = await api('/me');
+      document.getElementById('user-line').textContent =
+        (me.name ? me.name + ' · ' : '') + (me.role === 'admin' ? 'админ' : 'гость');
+      if (pinRequired && !j.pin_ok) { showPin(true); return; }
+      showPin(false);
+      await loadHome();
+    } catch(e) { showGate(true, e.message); }
+  }
+  async function loadHome(){
+    document.getElementById('view-home').classList.remove('hidden');
+    document.getElementById('view-room').classList.add('hidden');
+    const j = await api('/rooms');
+    const el = document.getElementById('rooms-list');
+    el.innerHTML = '';
+    (j.rooms || []).forEach(r => {
+      const b = document.createElement('button');
+      b.type = 'button'; b.className = 'card';
+      b.innerHTML = '<span class="ico">' + esc(r.icon) + '</span><span class="row-body"><span class="row-title">' + esc(r.title) + '</span></span><span>›</span>';
+      b.onclick = () => openRoom(r.id);
+      el.appendChild(b);
+    });
+    if (!(j.rooms||[]).length) el.innerHTML = '<p class="sub">Нет комнат — настройте server/data/rooms.json</p>';
+  }
+  async function openRoom(id){
+    const j = await api('/room/' + encodeURIComponent(id));
+    const room = j.room;
+    document.getElementById('view-home').classList.add('hidden');
+    document.getElementById('view-room').classList.remove('hidden');
+    document.getElementById('room-title').textContent = (room.icon || '') + ' ' + (room.title || id);
+    const entEl = document.getElementById('entities-list');
+    entEl.innerHTML = '';
+    (room.entities || []).forEach(ent => {
+      const row = document.createElement('div');
+      row.className = 'card';
+      const meta = ent.unit ? ent.state + ' ' + ent.unit : ent.state;
+      row.innerHTML = '<span class="row-body"><span class="row-title">' + esc(ent.title || ent.friendly_name) + '</span><span class="row-meta">' + esc(meta) + '</span></span>';
+      const btn = document.createElement('button');
+      btn.type = 'button'; btn.className = 'toggle' + (ent.is_on ? ' on' : '');
+      btn.onclick = async () => {
+        try {
+          const t = await api('/entity/toggle', { method:'POST', body: JSON.stringify({ entity_id: ent.entity_id || ent.id }) });
+          btn.classList.toggle('on', !!t.entity?.is_on);
+          tg?.HapticFeedback?.impactOccurred('light');
+        } catch(e) {
+          if (String(e.message).includes('PIN')) showPin(true);
+          else alert(e.message);
+        }
+      };
+      row.appendChild(btn);
+      entEl.appendChild(row);
+    });
+    const autoEl = document.getElementById('autos-list');
+    autoEl.innerHTML = '';
+    (room.automations || []).forEach(a => {
+      const b = document.createElement('button');
+      b.type = 'button'; b.className = 'card';
+      b.innerHTML = '<span class="ico">⚡</span><span class="row-body"><span class="row-title">' + esc(a.title) + '</span><span class="row-meta">Запустить</span></span>';
+      b.onclick = async () => {
+        if (!confirm('Запустить «' + (a.title||a.id) + '»?')) return;
+        try {
+          await api('/automation/trigger', { method:'POST', body: JSON.stringify({ entity_id: a.id }) });
+          tg?.HapticFeedback?.notificationOccurred('success');
+        } catch(e) {
+          if (String(e.message).includes('PIN')) showPin(true);
+          else alert(e.message);
+        }
+      };
+      autoEl.appendChild(b);
+    });
+    if (!(room.automations||[]).length) autoEl.innerHTML = '<p class="sub">Нет автоматизаций в конфиге</p>';
+  }
+  document.getElementById('btn-back').onclick = loadHome;
+  renderPinPad();
+  boot();
+})();
+</script>
+</body>
+</html>

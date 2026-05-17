@@ -1,0 +1,21 @@
+{
+  "living": {
+    "title": "Гостиная",
+    "icon": "🛋",
+    "entities": [
+      { "id": "light.living_room", "title": "Свет", "type": "light" },
+      { "id": "switch.tv", "title": "Телевизор", "type": "switch" }
+    ],
+    "automations": [
+      { "id": "automation.evening_lights", "title": "Вечерний свет" }
+    ]
+  },
+  "bedroom": {
+    "title": "Спальня",
+    "icon": "🛏",
+    "entities": [
+      { "id": "light.bedroom", "title": "Свет" }
+    ],
+    "automations": []
+  }
+}

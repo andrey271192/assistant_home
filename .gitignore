@@ -1,0 +1,9 @@
+.env
+server/.env
+server/data/tg_sessions.json
+__pycache__/
+*.pyc
+.venv/
+venv/
+.DS_Store
+*.log

@@ -1,0 +1,15 @@
+[Unit]
+Description=Assistant Home (Telegram + Home Assistant)
+After=network.target
+
+[Service]
+Type=simple
+User=root
+EnvironmentFile=/opt/assistant_home/server/.env
+WorkingDirectory=/opt/assistant_home
+ExecStart=/opt/assistant_home/.venv/bin/uvicorn server.main:app --host 127.0.0.1 --port 8010
+Restart=always
+RestartSec=5
+
+[Install]
+WantedBy=multi-user.target
