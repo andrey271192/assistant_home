@@ -1,0 +1,1513 @@
+{
+  "balkon": {
+    "title": "Балкон",
+    "icon": "🌿",
+    "entities": [
+      {
+        "id": "fan.ventiliator",
+        "title": "Вентилятор",
+        "type": "fan"
+      },
+      {
+        "id": "fan.ventiliator_2",
+        "title": "Вентилятор",
+        "type": "fan"
+      },
+      {
+        "id": "light.balkon_liustra",
+        "title": "Балкон люстра",
+        "type": "light"
+      },
+      {
+        "id": "switch.sonoff_1000a58ac9",
+        "title": "Балкон люстра",
+        "type": "switch"
+      },
+      {
+        "id": "switch.sonoff_1000ad75d8",
+        "title": "Вентилятор",
+        "type": "switch"
+      },
+      {
+        "id": "switch.girlianda_spalnia_balkon",
+        "title": "Кабинет Гирлянда балкон",
+        "type": "switch"
+      },
+      {
+        "id": "switch.sonoff_1000a58aca",
+        "title": "Насос увлажнителя балкон",
+        "type": "switch"
+      },
+      {
+        "id": "switch.sonoff_1000a58aca_pulse",
+        "title": "Насос увлажнителя балкон INCHING",
+        "type": "switch"
+      }
+    ],
+    "automations": []
+  },
+  "cherepakha": {
+    "title": "Черепаха",
+    "icon": "🏠",
+    "entities": [
+      {
+        "id": "climate.sonoff_10004b1be9",
+        "title": "Черепаха температура",
+        "type": "climate"
+      },
+      {
+        "id": "light.cherepakha_svet",
+        "title": "Черепаха свет",
+        "type": "light"
+      },
+      {
+        "id": "light.cherepakha_temperatura",
+        "title": "Черепаха температура",
+        "type": "light"
+      },
+      {
+        "id": "switch.sonoff_1000ae0818",
+        "title": "Черепаха свет",
+        "type": "switch"
+      },
+      {
+        "id": "switch.sonoff_10004b1be9",
+        "title": "Черепаха температура",
+        "type": "switch"
+      }
+    ],
+    "automations": []
+  },
+  "gostinaia": {
+    "title": "Гостиная",
+    "icon": "🛋",
+    "entities": [
+      {
+        "id": "binary_sensor.datchik_vody_moisture",
+        "title": "Вода зал Wifi Влага",
+        "type": "binary_sensor"
+      },
+      {
+        "id": "fan.dmaker_p45_c3c2_fan",
+        "title": "Вентилятор Fan",
+        "type": "fan"
+      },
+      {
+        "id": "light.dmaker_p45_c3c2_indicator_light",
+        "title": "Вентилятор Indicator Light",
+        "type": "light"
+      },
+      {
+        "id": "light.liustra_zal",
+        "title": "Люстра зал",
+        "type": "light"
+      },
+      {
+        "id": "light.liustra_zal_2sht",
+        "title": "Люстра зал 2шт",
+        "type": "light"
+      },
+      {
+        "id": "light.svetilnik_v_zale",
+        "title": "Светильник в зале",
+        "type": "light"
+      },
+      {
+        "id": "light.svetilnik_v_zale_2",
+        "title": "Светильник в зале",
+        "type": "light"
+      },
+      {
+        "id": "media_player.yandex_station_9410503441100c1b008b",
+        "title": "Алиса",
+        "type": "media_player"
+      },
+      {
+        "id": "media_player.yandex_module_d00rx0300tqnvw",
+        "title": "Модуль зал",
+        "type": "media_player"
+      },
+      {
+        "id": "media_player.yandex_station_s00crk0007j1nw",
+        "title": "Хаб",
+        "type": "media_player"
+      },
+      {
+        "id": "switch.dmaker_p45_c3c2_alarm",
+        "title": "Вентилятор Alarm",
+        "type": "switch"
+      },
+      {
+        "id": "switch.dmaker_p45_c3c2_horizontal_swing",
+        "title": "Вентилятор Fan Horizontal Swing",
+        "type": "switch"
+      },
+      {
+        "id": "switch.dmaker_p45_c3c2_physical_control_locked",
+        "title": "Вентилятор Physical Control Locked",
+        "type": "switch"
+      },
+      {
+        "id": "switch.sonoff_1002044c00_1",
+        "title": "Люстра зал",
+        "type": "switch"
+      },
+      {
+        "id": "switch.sonoff_1001ecf2b8_1",
+        "title": "Люстра зал 2шт",
+        "type": "switch"
+      },
+      {
+        "id": "switch.sonoff_1000569127",
+        "title": "Светильник в зале",
+        "type": "switch"
+      }
+    ],
+    "automations": []
+  },
+  "kabinet": {
+    "title": "Кабинет",
+    "icon": "💼",
+    "entities": [
+      {
+        "id": "binary_sensor.4bbde4a8_df9709ef",
+        "title": "binary_sensor.4bbde4a8_df9709ef",
+        "type": "binary_sensor"
+      },
+      {
+        "id": "binary_sensor.wifishui_jin_chuan_gan_qi_moisture_2",
+        "title": "Вода кабинет Wifi Влага",
+        "type": "binary_sensor"
+      },
+      {
+        "id": "binary_sensor.649e31894853_occupancy",
+        "title": "Датчик присутствия  Occupancy",
+        "type": "binary_sensor"
+      },
+      {
+        "id": "cover.zhi_neng_chuang_lian_dian_ji_curtain",
+        "title": "Шторы Штора",
+        "type": "cover"
+      },
+      {
+        "id": "light.4bbde4a8_df9709ef_screen",
+        "title": "Screen",
+        "type": "light"
+      },
+      {
+        "id": "light.54ef4446ddcb_led",
+        "title": "Xiaomi шлюз LED",
+        "type": "light"
+      },
+      {
+        "id": "light.kabinet_prozhektor",
+        "title": "Кабинет прожектор",
+        "type": "light"
+      },
+      {
+        "id": "light.lampa_1",
+        "title": "Лампа",
+        "type": "light"
+      },
+      {
+        "id": "light.liustra_kabinet",
+        "title": "Люстра кабинет",
+        "type": "light"
+      },
+      {
+        "id": "light.sonoff_1000fc7a29",
+        "title": "Подсветка Кабинет",
+        "type": "light"
+      },
+      {
+        "id": "light.unknown",
+        "title": "Подсветка принтер",
+        "type": "light"
+      },
+      {
+        "id": "light.kabinet_torsher",
+        "title": "Подсветка растений (торшер)",
+        "type": "light"
+      },
+      {
+        "id": "light.torsher_kabinet",
+        "title": "Торшер кабинет",
+        "type": "light"
+      },
+      {
+        "id": "light.cherep_vykliuchatel_1",
+        "title": "Фонтан",
+        "type": "light"
+      },
+      {
+        "id": "light.sonoff_1001335688",
+        "title": "светильник кабинет",
+        "type": "light"
+      },
+      {
+        "id": "media_player.win_kabinet",
+        "title": "WIN-kabinet",
+        "type": "media_player"
+      },
+      {
+        "id": "media_player.4bbde4a8_df9709ef",
+        "title": "media_player.4bbde4a8_df9709ef",
+        "type": "media_player"
+      },
+      {
+        "id": "media_player.yandex_station_lg0000000000007158470000966053e2",
+        "title": "Яндекс Лайт Кабинет Кабинет",
+        "type": "media_player"
+      },
+      {
+        "id": "scene.alisa_kabinet",
+        "title": "Алиса кабинет",
+        "type": "scene"
+      },
+      {
+        "id": "scene.fioletovyi",
+        "title": "оранжевый",
+        "type": "scene"
+      },
+      {
+        "id": "switch.sonoff_1000a5e67e",
+        "title": "Гирлянда балкон",
+        "type": "switch"
+      },
+      {
+        "id": "switch.649e31894853_led",
+        "title": "Датчик присутствия  LED",
+        "type": "switch"
+      },
+      {
+        "id": "switch.levaia_lampa_socket_1",
+        "title": "Кабинет мониторы",
+        "type": "switch"
+      },
+      {
+        "id": "switch.kabinet_prozhektor",
+        "title": "Кабинет прожектор",
+        "type": "switch"
+      },
+      {
+        "id": "switch.sonoff_10020442db_1",
+        "title": "Люстра кабинет",
+        "type": "switch"
+      },
+      {
+        "id": "switch.torsher_kabinet_do_not_disturb",
+        "title": "Торшер кабинет Do not disturb",
+        "type": "switch"
+      },
+      {
+        "id": "switch.unknown_switch_1",
+        "title": "Череп",
+        "type": "switch"
+      },
+      {
+        "id": "switch.isa_hlc6_48e6_switch_status",
+        "title": "камера кабинет Camera Control Switch Status",
+        "type": "switch"
+      },
+      {
+        "id": "switch.isa_hlc6_48e6_time_watermark",
+        "title": "камера кабинет Camera Control Time Watermark",
+        "type": "switch"
+      }
+    ],
+    "automations": [
+      {
+        "id": "automation.kabinet_vykliuchatel_vkliuchit",
+        "title": "Кабинет выключатель включить"
+      },
+      {
+        "id": "automation.kabinet_vykliuchatel_vykliuchit",
+        "title": "Кабинет выключатель выключить"
+      }
+    ]
+  },
+  "koridor": {
+    "title": "Коридор",
+    "icon": "🚪",
+    "entities": [
+      {
+        "id": "binary_sensor.datchik_dvizheniia_xiaomi_occupancy",
+        "title": "Датчик движения xiaomi Занятость",
+        "type": "binary_sensor"
+      },
+      {
+        "id": "light.koridor_vykliuchatel_1",
+        "title": "Коридор подсветка растений Switch 1",
+        "type": "light"
+      },
+      {
+        "id": "switch.dreamebot_l30_ultra_ai_furniture_detection",
+        "title": "DreameBot L30 Ultra AI Furniture Detection",
+        "type": "switch"
+      },
+      {
+        "id": "switch.dreamebot_l30_ultra_ai_obstacle_detection",
+        "title": "DreameBot L30 Ultra AI Obstacle Detection",
+        "type": "switch"
+      },
+      {
+        "id": "switch.dreamebot_l30_ultra_ai_obstacle_image_upload",
+        "title": "DreameBot L30 Ultra AI Obstacle Image Upload",
+        "type": "switch"
+      },
+      {
+        "id": "switch.dreamebot_l30_ultra_ai_obstacle_picture",
+        "title": "DreameBot L30 Ultra AI Obstacle Picture",
+        "type": "switch"
+      },
+      {
+        "id": "switch.dreamebot_l30_ultra_ai_pet_detection",
+        "title": "DreameBot L30 Ultra AI Pet Detection",
+        "type": "switch"
+      },
+      {
+        "id": "switch.dreamebot_l30_ultra_auto_drying",
+        "title": "DreameBot L30 Ultra Auto Drying",
+        "type": "switch"
+      },
+      {
+        "id": "switch.dreamebot_l30_ultra_auto_mount_mop",
+        "title": "DreameBot L30 Ultra Auto Mount Mop",
+        "type": "switch"
+      },
+      {
+        "id": "switch.dreamebot_l30_ultra_auto_water_refilling",
+        "title": "DreameBot L30 Ultra Auto Water Refilling",
+        "type": "switch"
+      },
+      {
+        "id": "switch.dreamebot_l30_ultra_auto_add_detergent",
+        "title": "DreameBot L30 Ultra Auto-Add Detergent",
+        "type": "switch"
+      },
+      {
+        "id": "switch.dreamebot_l30_ultra_camera_light_brightness_auto",
+        "title": "DreameBot L30 Ultra Camera Light Brightness Auto",
+        "type": "switch"
+      },
+      {
+        "id": "switch.dreamebot_l30_ultra_carpet_boost",
+        "title": "DreameBot L30 Ultra Carpet Boost",
+        "type": "switch"
+      },
+      {
+        "id": "switch.dreamebot_l30_ultra_child_lock",
+        "title": "DreameBot L30 Ultra Child Lock",
+        "type": "switch"
+      },
+      {
+        "id": "switch.dreamebot_l30_ultra_clean_carpets_first",
+        "title": "DreameBot L30 Ultra Clean Carpets First",
+        "type": "switch"
+      },
+      {
+        "id": "switch.dreamebot_l30_ultra_cleaning_sequence",
+        "title": "DreameBot L30 Ultra Cleaning Sequence",
+        "type": "switch"
+      },
+      {
+        "id": "switch.dreamebot_l30_ultra_collision_avoidance",
+        "title": "DreameBot L30 Ultra Collision Avoidance",
+        "type": "switch"
+      },
+      {
+        "id": "switch.dreamebot_l30_ultra_customized_cleaning",
+        "title": "DreameBot L30 Ultra Customized Cleaning",
+        "type": "switch"
+      },
+      {
+        "id": "switch.dreamebot_l30_ultra_dnd",
+        "title": "DreameBot L30 Ultra DnD",
+        "type": "switch"
+      },
+      {
+        "id": "switch.dreamebot_l30_ultra_fill_light",
+        "title": "DreameBot L30 Ultra Fill Light",
+        "type": "switch"
+      },
+      {
+        "id": "switch.dreamebot_l30_ultra_floor_direction_cleaning",
+        "title": "DreameBot L30 Ultra Floor Direction Cleaning",
+        "type": "switch"
+      },
+      {
+        "id": "switch.dreamebot_l30_ultra_fuzzy_obstacle_detection",
+        "title": "DreameBot L30 Ultra Fuzzy Obstacle Detection",
+        "type": "switch"
+      },
+      {
+        "id": "switch.dreamebot_l30_ultra_hot_washing",
+        "title": "DreameBot L30 Ultra Hot Washing",
+        "type": "switch"
+      },
+      {
+        "id": "switch.dreamebot_l30_ultra_human_follow",
+        "title": "DreameBot L30 Ultra Human Follow",
+        "type": "switch"
+      },
+      {
+        "id": "switch.dreamebot_l30_ultra_intelligent_recognition",
+        "title": "DreameBot L30 Ultra Intelligent Recognition",
+        "type": "switch"
+      },
+      {
+        "id": "switch.dreamebot_l30_ultra_intensive_carpet_cleaning",
+        "title": "DreameBot L30 Ultra Intensive Carpet Cleaning",
+        "type": "switch"
+      },
+      {
+        "id": "switch.dreamebot_l30_ultra_max_suction_power",
+        "title": "DreameBot L30 Ultra Max Suction Power",
+        "type": "switch"
+      },
+      {
+        "id": "switch.dreamebot_l30_ultra_multi_floor_map",
+        "title": "DreameBot L30 Ultra Multi Floor Map",
+        "type": "switch"
+      },
+      {
+        "id": "switch.dreamebot_l30_ultra_obstacle_avoidance",
+        "title": "DreameBot L30 Ultra Obstacle Avoidance",
+        "type": "switch"
+      },
+      {
+        "id": "switch.dreamebot_l30_ultra_off_peak_charging",
+        "title": "DreameBot L30 Ultra Off-Peak Charging",
+        "type": "switch"
+      },
+      {
+        "id": "switch.dreamebot_l30_ultra_pet_focused_detection",
+        "title": "DreameBot L30 Ultra Pet Focused Detection",
+        "type": "switch"
+      },
+      {
+        "id": "switch.dreamebot_l30_ultra_pet_picture",
+        "title": "DreameBot L30 Ultra Pet Picture",
+        "type": "switch"
+      },
+      {
+        "id": "switch.dreamebot_l30_ultra_resume_cleaning",
+        "title": "DreameBot L30 Ultra Resume Cleaning",
+        "type": "switch"
+      },
+      {
+        "id": "switch.dreamebot_l30_ultra_self_clean_by_zone",
+        "title": "DreameBot L30 Ultra Self Clean By Zone",
+        "type": "switch"
+      },
+      {
+        "id": "switch.dreamebot_l30_ultra_self_clean",
+        "title": "DreameBot L30 Ultra Self-Clean",
+        "type": "switch"
+      },
+      {
+        "id": "switch.dreamebot_l30_ultra_streaming_voice_prompt",
+        "title": "DreameBot L30 Ultra Streaming Voice Prompt",
+        "type": "switch"
+      },
+      {
+        "id": "switch.dreamebot_l30_ultra_voice_assistant",
+        "title": "DreameBot L30 Ultra Voice Assistant",
+        "type": "switch"
+      },
+      {
+        "id": "switch.e3372_mobile_data",
+        "title": "E3372 Мобильные данные",
+        "type": "switch"
+      },
+      {
+        "id": "switch.e3372_mobile_data_2",
+        "title": "E3372 Мобильные данные",
+        "type": "switch"
+      },
+      {
+        "id": "switch.koridor_switch_1",
+        "title": "Коридор подсветка растений Switch 1",
+        "type": "switch"
+      },
+      {
+        "id": "switch.sonoff_1001eb2749_1",
+        "title": "Люстра коридор",
+        "type": "switch"
+      },
+      {
+        "id": "switch.sonoff_100116be83",
+        "title": "Люстра коридор",
+        "type": "switch"
+      }
+    ],
+    "automations": [
+      {
+        "id": "automation.koridor_vykliuchatel_pravaia_knopka_odno_nazhatie_vykl_vkl_liustra",
+        "title": "Коридор выключатель правая кнопка (одно нажатие) выкл/вкл люстра"
+      }
+    ]
+  },
+  "kukhnia": {
+    "title": "Кухня",
+    "icon": "🍳",
+    "entities": [
+      {
+        "id": "binary_sensor.wifishui_jin_chuan_gan_qi_4_moisture",
+        "title": "Вода батарея кухня Wifi",
+        "type": "binary_sensor"
+      },
+      {
+        "id": "binary_sensor.wifishui_jin_chuan_gan_qi_2_moisture",
+        "title": "Вода кухня раковина Wifi Влага",
+        "type": "binary_sensor"
+      },
+      {
+        "id": "binary_sensor.voda",
+        "title": "Дверь",
+        "type": "binary_sensor"
+      },
+      {
+        "id": "light.musorka",
+        "title": "Гирлянда зал окно",
+        "type": "light"
+      },
+      {
+        "id": "light.kukhnia_girlianda",
+        "title": "Кухня Гирлянда",
+        "type": "light"
+      },
+      {
+        "id": "light.kukhnia_girlianda_2",
+        "title": "Кухня Гирлянда",
+        "type": "light"
+      },
+      {
+        "id": "light.kukhnia_girlianda_3",
+        "title": "Кухня Гирлянда",
+        "type": "light"
+      },
+      {
+        "id": "light.kukhnia_podsvetka_rastenii_stellazh",
+        "title": "Кухня Подсветка растений стеллаж",
+        "type": "light"
+      },
+      {
+        "id": "light.kukhnia_podsvetka",
+        "title": "Кухня подсветка",
+        "type": "light"
+      },
+      {
+        "id": "light.liustra_kukhnia",
+        "title": "Люстра кухня",
+        "type": "light"
+      },
+      {
+        "id": "light.svetilnik_kukhnia_2",
+        "title": "Светильник кухня",
+        "type": "light"
+      },
+      {
+        "id": "media_player.yandex_module_d00fx80008g2kw",
+        "title": "Модуль кухня",
+        "type": "media_player"
+      },
+      {
+        "id": "media_player.yandex_station_lb000000000000125434000029373b14",
+        "title": "Яндекс Лайт Кухня",
+        "type": "media_player"
+      },
+      {
+        "id": "media_player.yandex_station_ff98f0291b9d6c5edf690345",
+        "title": "Яндекс Мини",
+        "type": "media_player"
+      },
+      {
+        "id": "switch.voda_2",
+        "title": "voda Бакторицидная лампа под раковиной",
+        "type": "switch"
+      },
+      {
+        "id": "switch.voda",
+        "title": "voda Свет под раковиной",
+        "type": "switch"
+      },
+      {
+        "id": "switch.sonoff_1000ada794",
+        "title": "Гирлянда зал окно",
+        "type": "switch"
+      },
+      {
+        "id": "switch.isa_hlc6_c6f7_switch_status",
+        "title": "Камера кухня Camera Control Switch Status",
+        "type": "switch"
+      },
+      {
+        "id": "switch.isa_hlc6_c6f7_time_watermark",
+        "title": "Камера кухня Camera Control Time Watermark",
+        "type": "switch"
+      },
+      {
+        "id": "switch.sonoff_1000568995",
+        "title": "Кухня Вытяжка",
+        "type": "switch"
+      },
+      {
+        "id": "switch.sonoff_1000568995_pulse",
+        "title": "Кухня Вытяжка  INCHING",
+        "type": "switch"
+      },
+      {
+        "id": "switch.sonoff_1000568995_led",
+        "title": "Кухня Вытяжка  LED",
+        "type": "switch"
+      },
+      {
+        "id": "switch.sonoff_1000ad8e1c",
+        "title": "Кухня Гирлянда",
+        "type": "switch"
+      },
+      {
+        "id": "switch.sonoff_1000a5bb98",
+        "title": "Кухня Подсветка растений стеллаж",
+        "type": "switch"
+      },
+      {
+        "id": "switch.sonoff_1000568441",
+        "title": "Кухня подсветка",
+        "type": "switch"
+      },
+      {
+        "id": "switch.liustra_kukhnia",
+        "title": "Люстра кухня",
+        "type": "switch"
+      },
+      {
+        "id": "switch.sonoff_1000636a12",
+        "title": "Светильник кухня",
+        "type": "switch"
+      },
+      {
+        "id": "switch.sonoff_1000ae0abb",
+        "title": "Телевизор",
+        "type": "switch"
+      }
+    ],
+    "automations": [
+      {
+        "id": "automation.alisa_avtomatizatsiia_vkliuchila",
+        "title": "Алиса автоматизация включила"
+      },
+      {
+        "id": "automation.kukhnia_musorka_vykliuchit_svet",
+        "title": "Кухня мусорка выключить свет"
+      },
+      {
+        "id": "automation.vykliuchila_avtomatizatsiiu_alisa",
+        "title": "выключила автоматизацию Алиса"
+      },
+      {
+        "id": "automation.kukhnia_avtomatizatsiia_svet",
+        "title": "кухня автоматизация свет"
+      },
+      {
+        "id": "automation.kukhnia_vykliuchit_zvuk",
+        "title": "кухня выключить звук"
+      },
+      {
+        "id": "automation.kukhnia_uvelichit_zvuk",
+        "title": "кухня увеличить звук"
+      },
+      {
+        "id": "automation.kukhnia_umenshit_zvuk",
+        "title": "кухня уменьшить звук"
+      }
+    ]
+  },
+  "mashina": {
+    "title": "Машина",
+    "icon": "🏠",
+    "entities": [
+      {
+        "id": "binary_sensor.starline_trunk",
+        "title": "StarLine Багажник",
+        "type": "binary_sensor"
+      },
+      {
+        "id": "binary_sensor.starline_hood",
+        "title": "StarLine Капот",
+        "type": "binary_sensor"
+      },
+      {
+        "id": "binary_sensor.starline_alarm",
+        "title": "StarLine Сигнализация",
+        "type": "binary_sensor"
+      },
+      {
+        "id": "switch.starline_engine",
+        "title": "StarLine Двигатель",
+        "type": "switch"
+      },
+      {
+        "id": "switch.starline_service_mode",
+        "title": "StarLine Режим обслуживания",
+        "type": "switch"
+      }
+    ],
+    "automations": []
+  },
+  "podezd": {
+    "title": "Подъезд",
+    "icon": "🏠",
+    "entities": [
+      {
+        "id": "binary_sensor.dvizhenie_kabinet_motion",
+        "title": "Движение Подъезд Движение",
+        "type": "binary_sensor"
+      }
+    ],
+    "automations": [
+      {
+        "id": "automation.dvizhenie_podezd",
+        "title": "Движение Подъезд"
+      }
+    ]
+  },
+  "prikhozhaia": {
+    "title": "Прихожая",
+    "icon": "🚪",
+    "entities": [
+      {
+        "id": "binary_sensor.dvizhenie_prikhozhaia_motion",
+        "title": "движение прихожая Движение",
+        "type": "binary_sensor"
+      },
+      {
+        "id": "light.prikhozhaia_liustra_2",
+        "title": "Прихожая люстра",
+        "type": "light"
+      },
+      {
+        "id": "light.prikhozhaia_svetilnik",
+        "title": "Прихожая светильник",
+        "type": "light"
+      },
+      {
+        "id": "switch.sonoff_1001e323fe_1",
+        "title": "Прихожая люстра",
+        "type": "switch"
+      },
+      {
+        "id": "switch.sonoff_1000568b8c",
+        "title": "Прихожая светильник",
+        "type": "switch"
+      }
+    ],
+    "automations": [
+      {
+        "id": "automation.prikhozhaia_svetilnik",
+        "title": "Прихожая светильник"
+      }
+    ]
+  },
+  "printer": {
+    "title": "Принтер",
+    "icon": "🏠",
+    "entities": [
+      {
+        "id": "binary_sensor.a1_03919d4c1900016_hms_errors",
+        "title": "Принтер_BambuLab HMS errors",
+        "type": "binary_sensor"
+      },
+      {
+        "id": "binary_sensor.a1_03919d4c1900016_print_error",
+        "title": "Принтер_BambuLab Print error",
+        "type": "binary_sensor"
+      },
+      {
+        "id": "fan.a1_03919d4c1900016_cooling_fan",
+        "title": "Принтер_BambuLab Cooling fan",
+        "type": "fan"
+      },
+      {
+        "id": "light.a1_03919d4c1900016_chamber_light",
+        "title": "Принтер_BambuLab Chamber light",
+        "type": "light"
+      },
+      {
+        "id": "switch.a1_03919d4c1900016_enable_camera",
+        "title": "Принтер_BambuLab Camera",
+        "type": "switch"
+      },
+      {
+        "id": "switch.a1_03919d4c1900016_use_image_sensor_camera",
+        "title": "Принтер_BambuLab Image sensor camera",
+        "type": "switch"
+      },
+      {
+        "id": "switch.a1_03919d4c1900016_allow_prompt_sound",
+        "title": "Принтер_BambuLab Prompt sound",
+        "type": "switch"
+      }
+    ],
+    "automations": []
+  },
+  "rasteniia": {
+    "title": "Растения",
+    "icon": "🏠",
+    "entities": [
+      {
+        "id": "light.svetilnik_vannaia",
+        "title": "Ванная подсветка растений",
+        "type": "light"
+      },
+      {
+        "id": "light.kabinet_podsvetka_rastenii_rozetka_1",
+        "title": "Кабинет подсветка растений",
+        "type": "light"
+      },
+      {
+        "id": "light.kor_rasteniia_stellazh",
+        "title": "Кор растения стеллаж",
+        "type": "light"
+      },
+      {
+        "id": "light.kor_rasteniia_ugol",
+        "title": "Подсветка растений этажерка",
+        "type": "light"
+      },
+      {
+        "id": "light.kukhnia_podsvetka_rastenii",
+        "title": "кухня Подсветка растений",
+        "type": "light"
+      },
+      {
+        "id": "light.kukhnia_podsvetka_rastenii_2",
+        "title": "кухня Подсветка растений",
+        "type": "light"
+      },
+      {
+        "id": "switch.sonoff_1000adb565",
+        "title": "Ванная подсветка растений",
+        "type": "switch"
+      },
+      {
+        "id": "switch.pravaia_lampa_socket_1",
+        "title": "Кабинет подсветка растений",
+        "type": "switch"
+      },
+      {
+        "id": "switch.sonoff_100063a029",
+        "title": "Кор растения стеллаж",
+        "type": "switch"
+      },
+      {
+        "id": "switch.sonoff_1000a5bbe7",
+        "title": "Подсветка растений этажерка",
+        "type": "switch"
+      },
+      {
+        "id": "switch.sonoff_1000638128",
+        "title": "кухня Подсветка растений",
+        "type": "switch"
+      }
+    ],
+    "automations": [
+      {
+        "id": "automation.rasteniia_vykliuchit",
+        "title": "Растения выключить"
+      }
+    ]
+  },
+  "server": {
+    "title": "Сервер",
+    "icon": "🖥",
+    "entities": [
+      {
+        "id": "binary_sensor.unknown",
+        "title": "binary_sensor.unknown",
+        "type": "binary_sensor"
+      },
+      {
+        "id": "binary_sensor.musorka_door",
+        "title": "Дверь серверная Дверь",
+        "type": "binary_sensor"
+      },
+      {
+        "id": "light.esp32_4848s040_t1_display_backlight",
+        "title": "ESP32-экран Display Backlight",
+        "type": "light"
+      },
+      {
+        "id": "light.unknown_screen",
+        "title": "Screen",
+        "type": "light"
+      },
+      {
+        "id": "light.svet_servernaia",
+        "title": "Серверная Свет серверная",
+        "type": "light"
+      },
+      {
+        "id": "media_player.server_2",
+        "title": "SERVER",
+        "type": "media_player"
+      },
+      {
+        "id": "media_player.vlc_telnet",
+        "title": "VLC-TELNET",
+        "type": "media_player"
+      },
+      {
+        "id": "media_player.unknown",
+        "title": "media_player.unknown",
+        "type": "media_player"
+      },
+      {
+        "id": "switch.netcraze_ultra_0b7314_cdcethernet_huawei_mobile_broadband",
+        "title": "Netcraze Ultra 0b7314 CdcEthernet Huawei Mobile Broadband",
+        "type": "switch"
+      },
+      {
+        "id": "switch.netcraze_ultra_0b7314_openconnect_f8f9_vtb126_netcraze_club",
+        "title": "Netcraze Ultra 0b7314 OpenConnect f8f9.vtb126.netcraze.club",
+        "type": "switch"
+      },
+      {
+        "id": "switch.netcraze_ultra_0b7314_openconnect_ypr1",
+        "title": "Netcraze Ultra 0b7314 OpenConnect ypr1",
+        "type": "switch"
+      },
+      {
+        "id": "switch.netcraze_ultra_0b7314_openconnect_izrail_nocli0",
+        "title": "Netcraze Ultra 0b7314 OpenConnect Израиль_nocli0",
+        "type": "switch"
+      },
+      {
+        "id": "switch.netcraze_ultra_0b7314_openconnect_shkola",
+        "title": "Netcraze Ultra 0b7314 OpenConnect школа",
+        "type": "switch"
+      },
+      {
+        "id": "switch.netcraze_ultra_0b7314_pppoe_rostelekom",
+        "title": "Netcraze Ultra 0b7314 PPPoE Ростелеком",
+        "type": "switch"
+      },
+      {
+        "id": "switch.netcraze_ultra_0b7314_proxy_xray_balancer_xray",
+        "title": "Netcraze Ultra 0b7314 Proxy xRay-Balancer-xray",
+        "type": "switch"
+      },
+      {
+        "id": "switch.netcraze_ultra_0b7314_wifi_guest_5g",
+        "title": "Netcraze Ultra 0b7314 WiFi Guest 5G",
+        "type": "switch"
+      },
+      {
+        "id": "switch.netcraze_ultra_0b7314_wifi_smart_home_2_4g",
+        "title": "Netcraze Ultra 0b7314 WiFi Smart_home 2.4G",
+        "type": "switch"
+      },
+      {
+        "id": "switch.netcraze_ultra_0b7314_wifi_smart_home_2_4g_2",
+        "title": "Netcraze Ultra 0b7314 WiFi Smart_home 2.4G",
+        "type": "switch"
+      },
+      {
+        "id": "switch.netcraze_ultra_0b7314_wifi_apple_5g",
+        "title": "Netcraze Ultra 0b7314 WiFi apple 5G",
+        "type": "switch"
+      },
+      {
+        "id": "switch.netcraze_ultra_0b7314_wireguard_am",
+        "title": "Netcraze Ultra 0b7314 Wireguard AM",
+        "type": "switch"
+      },
+      {
+        "id": "switch.netcraze_ultra_0b7314_wireguard_polsh",
+        "title": "Netcraze Ultra 0b7314 Wireguard Polsh",
+        "type": "switch"
+      },
+      {
+        "id": "switch.netcraze_ultra_0b7314_web_configurator_access",
+        "title": "Netcraze Ultra 0b7314 Доступ к Web Интерфейсу",
+        "type": "switch"
+      },
+      {
+        "id": "switch.netcraze_ultra_0b7314_usb_power_port_1",
+        "title": "Netcraze Ultra 0b7314 Питание USB порта 1",
+        "type": "switch"
+      },
+      {
+        "id": "switch.netcraze_ultra_0b7314_usb_power_port_2",
+        "title": "Netcraze Ultra 0b7314 Питание USB порта 2",
+        "type": "switch"
+      },
+      {
+        "id": "switch.netcraze_ultra_0b7314_wireguard_amnezia_moia",
+        "title": "Wireguard amnezia_моя",
+        "type": "switch"
+      },
+      {
+        "id": "switch.sonoff_10017a09fe",
+        "title": "Входное электричество",
+        "type": "switch"
+      },
+      {
+        "id": "switch.sonoff_100109bf19_2",
+        "title": "Серверная XA",
+        "type": "switch"
+      },
+      {
+        "id": "switch.sonoff_100109bf19_4",
+        "title": "Серверная Монитор",
+        "type": "switch"
+      },
+      {
+        "id": "switch.sonoff_100109bf19_3",
+        "title": "Серверная Свет серверная",
+        "type": "switch"
+      },
+      {
+        "id": "switch.sonoff_100109bf19_1",
+        "title": "Серверная вентиляция",
+        "type": "switch"
+      }
+    ],
+    "automations": [
+      {
+        "id": "automation.taimer_kamery_podezd",
+        "title": "Таймер камеры Подъезд"
+      }
+    ]
+  },
+  "spalnia": {
+    "title": "Спальня",
+    "icon": "🛏",
+    "entities": [
+      {
+        "id": "binary_sensor.wifishui_jin_chuan_gan_qi_moisture",
+        "title": "Вода спальня Wifi Влага",
+        "type": "binary_sensor"
+      },
+      {
+        "id": "binary_sensor.dvizhenie_spalnia_motion",
+        "title": "движение спальня Движение",
+        "type": "binary_sensor"
+      },
+      {
+        "id": "fan.zhimi_ma2_5e25_air_purifier",
+        "title": "Очиститель воздуха Air Purifier",
+        "type": "fan"
+      },
+      {
+        "id": "light.girlianda_spalnia",
+        "title": "Гирлянда спальня",
+        "type": "light"
+      },
+      {
+        "id": "light.spalnia_liustra",
+        "title": "Люстра Спальня",
+        "type": "light"
+      },
+      {
+        "id": "light.zhimi_ma2_5e25_indicator_light",
+        "title": "Очиститель воздуха Indicator Light",
+        "type": "light"
+      },
+      {
+        "id": "light.lampa_2",
+        "title": "Спальня",
+        "type": "light"
+      },
+      {
+        "id": "light.spalnia_liustra_2",
+        "title": "Спальня люстра",
+        "type": "light"
+      },
+      {
+        "id": "media_player.spalnia",
+        "title": "Спальня",
+        "type": "media_player"
+      },
+      {
+        "id": "media_player.yandex_station_x00jx1300a64yk",
+        "title": "Яндекс Станция Макс",
+        "type": "media_player"
+      },
+      {
+        "id": "switch.sonoff_1000ad7886",
+        "title": "Бактерицидная лампа спальня",
+        "type": "switch"
+      },
+      {
+        "id": "switch.sonoff_1000add75e",
+        "title": "Гирлянда спальня",
+        "type": "switch"
+      },
+      {
+        "id": "switch.zhimi_ca1_2a2d_alarm",
+        "title": "Мойка воздуха Alarm",
+        "type": "switch"
+      },
+      {
+        "id": "switch.zhimi_ca1_2a2d_physical_control_locked",
+        "title": "Мойка воздуха Physical Control Locked",
+        "type": "switch"
+      },
+      {
+        "id": "switch.manipuliator_krana_unknown_switch_1",
+        "title": "Окно спальня Switch 1",
+        "type": "switch"
+      },
+      {
+        "id": "switch.zhimi_ma2_5e25_switch_status",
+        "title": "Очиститель воздуха Air Purifier Switch Status",
+        "type": "switch"
+      },
+      {
+        "id": "switch.zhimi_ma2_5e25_alarm",
+        "title": "Очиститель воздуха Alarm",
+        "type": "switch"
+      },
+      {
+        "id": "switch.zhimi_ma2_5e25_physical_control_locked",
+        "title": "Очиститель воздуха Physical Control Locked",
+        "type": "switch"
+      },
+      {
+        "id": "switch.sonoff_1000a5d282",
+        "title": "Проектор",
+        "type": "switch"
+      },
+      {
+        "id": "switch.sonoff_1000a5d282_pulse",
+        "title": "Проектор INCHING",
+        "type": "switch"
+      },
+      {
+        "id": "switch.sonoff_1000a5d282_led",
+        "title": "Проектор LED",
+        "type": "switch"
+      },
+      {
+        "id": "switch.sonoff_1001180343",
+        "title": "Спальня люстра",
+        "type": "switch"
+      },
+      {
+        "id": "switch.spalnia_podsvetka_rastenii",
+        "title": "Спальня подсветка растений",
+        "type": "switch"
+      },
+      {
+        "id": "switch.sonoff_1000add757",
+        "title": "Увлажнитель балкон",
+        "type": "switch"
+      },
+      {
+        "id": "switch.sonoff_1000add757_led",
+        "title": "Увлажнитель балкон LED",
+        "type": "switch"
+      }
+    ],
+    "automations": [
+      {
+        "id": "automation.podsvetka_rastenii_vkliuchit",
+        "title": "Подсветка растений включить"
+      },
+      {
+        "id": "automation.podsvetka_rastenii_vykliuchit",
+        "title": "Подсветка растений выключить"
+      }
+    ]
+  },
+  "ulitsa": {
+    "title": "Улица",
+    "icon": "🌳",
+    "entities": [
+      {
+        "id": "binary_sensor.nvt_cell_motion_detection",
+        "title": "NVT Cell Motion Detection",
+        "type": "binary_sensor"
+      },
+      {
+        "id": "binary_sensor.nvt_motion_alarm",
+        "title": "NVT Motion Alarm",
+        "type": "binary_sensor"
+      },
+      {
+        "id": "binary_sensor.nvt_tamper_detection",
+        "title": "NVT Tamper Detection",
+        "type": "binary_sensor"
+      },
+      {
+        "id": "switch.nvt_autofocus",
+        "title": "NVT Автофокус",
+        "type": "switch"
+      },
+      {
+        "id": "switch.nvt_ir_lamp",
+        "title": "NVT ИК подсветка",
+        "type": "switch"
+      },
+      {
+        "id": "switch.nvt_wiper",
+        "title": "NVT Стеклоочиститель",
+        "type": "switch"
+      }
+    ],
+    "automations": []
+  },
+  "vannaia": {
+    "title": "Ванная",
+    "icon": "🛁",
+    "entities": [
+      {
+        "id": "binary_sensor.esp8266",
+        "title": "Ванная счетчики Контактный датчик",
+        "type": "binary_sensor"
+      },
+      {
+        "id": "binary_sensor.wifishui_jin_chuan_gan_qi_3_moisture",
+        "title": "Вода счетчики Wifi Влага",
+        "type": "binary_sensor"
+      },
+      {
+        "id": "climate.sonoff_1000a91ff6",
+        "title": "Вытяжка",
+        "type": "climate"
+      },
+      {
+        "id": "fan.vytiazhka",
+        "title": "Вытяжка",
+        "type": "fan"
+      },
+      {
+        "id": "light.vannaia_nochnik_zigbee",
+        "title": "Ванная ночник zigbee",
+        "type": "light"
+      },
+      {
+        "id": "light.liustra_vanna",
+        "title": "Люстра Ванна",
+        "type": "light"
+      },
+      {
+        "id": "light.nochnik",
+        "title": "Светильник ванная",
+        "type": "light"
+      },
+      {
+        "id": "media_player.yandex_station_lp000000000000801440000088772889",
+        "title": "Яндекс Лайт Ванная",
+        "type": "media_player"
+      },
+      {
+        "id": "switch.stiralnaia_mashina_1_rinse",
+        "title": "+1 полоскание",
+        "type": "switch"
+      },
+      {
+        "id": "switch.stiralnaia_mashina_2_rinses",
+        "title": "+2 полоскания",
+        "type": "switch"
+      },
+      {
+        "id": "switch.stiralnaia_mashina_3_rinses",
+        "title": "+3 полоскания",
+        "type": "switch"
+      },
+      {
+        "id": "switch.stiralnaia_mashina_acquaplus",
+        "title": "Акваплюс",
+        "type": "switch"
+      },
+      {
+        "id": "switch.vannaia_nochnik_zigbee_do_not_disturb",
+        "title": "Ванная ночник zigbee Do not disturb",
+        "type": "switch"
+      },
+      {
+        "id": "switch.esp8266_virtual_alarm",
+        "title": "Ванная счетчики Virtual Alarm",
+        "type": "switch"
+      },
+      {
+        "id": "switch.unknown_1",
+        "title": "Ванная счетчики Реле 1",
+        "type": "switch"
+      },
+      {
+        "id": "switch.sonoff_1000a91ff6",
+        "title": "Вытяжка",
+        "type": "switch"
+      },
+      {
+        "id": "switch.sonoff_1000a91ff6_led",
+        "title": "Вытяжка  LED",
+        "type": "switch"
+      },
+      {
+        "id": "switch.stiralnaia_mashina_hygiene_plus",
+        "title": "Гигиена плюс",
+        "type": "switch"
+      },
+      {
+        "id": "switch.0x842712fffe3fb283",
+        "title": "Люстра Ванна",
+        "type": "switch"
+      },
+      {
+        "id": "switch.stiralnaia_mashina_pause",
+        "title": "Пауза",
+        "type": "switch"
+      },
+      {
+        "id": "switch.stiralnaia_mashina_anticrease",
+        "title": "Противосминание",
+        "type": "switch"
+      },
+      {
+        "id": "switch.stiralnaia_mashina_good_night",
+        "title": "Спокойной ночи",
+        "type": "switch"
+      },
+      {
+        "id": "switch.stiralnaia_mashina_washing_machine",
+        "title": "Стиральная машина",
+        "type": "switch"
+      },
+      {
+        "id": "switch.stiralnaia_mashina_pre_wash",
+        "title": "предварительная мойка",
+        "type": "switch"
+      }
+    ],
+    "automations": [
+      {
+        "id": "automation.vannaia_vytiazhka",
+        "title": "Ванная вытяжка"
+      },
+      {
+        "id": "automation.vannaia_vytiazhka_vykliuchit",
+        "title": "Ванная вытяжка выключить"
+      },
+      {
+        "id": "automation.vannaia_nochnik_vykliuchit",
+        "title": "Ванная ночник выключить"
+      },
+      {
+        "id": "automation.vannaia_svet_vkliuchit",
+        "title": "Ванная свет включить"
+      },
+      {
+        "id": "automation.est_goriachaia_voda",
+        "title": "Есть горячая вода"
+      },
+      {
+        "id": "automation.netu_goriachei_vody",
+        "title": "Нету горячей воды"
+      }
+    ]
+  },
+  "vkhodnaia_dver": {
+    "title": "Входная дверь",
+    "icon": "🏠",
+    "entities": [
+      {
+        "id": "binary_sensor.vkhodnaia_dver_2_cell_motion_detection",
+        "title": "Входная дверь_2 Cell Motion Detection",
+        "type": "binary_sensor"
+      },
+      {
+        "id": "binary_sensor.vkhodnaia_dver_2_motion_alarm",
+        "title": "Входная дверь_2 Motion Alarm",
+        "type": "binary_sensor"
+      },
+      {
+        "id": "binary_sensor.vkhodnaia_dver_2_tamper_detection",
+        "title": "Входная дверь_2 Tamper Detection",
+        "type": "binary_sensor"
+      },
+      {
+        "id": "switch.vkhodnaia_dver_2_autofocus",
+        "title": "Входная дверь_2 Автофокус",
+        "type": "switch"
+      },
+      {
+        "id": "switch.vkhodnaia_dver_2_ir_lamp",
+        "title": "Входная дверь_2 ИК подсветка",
+        "type": "switch"
+      },
+      {
+        "id": "switch.vkhodnaia_dver_2_wiper",
+        "title": "Входная дверь_2 Стеклоочиститель",
+        "type": "switch"
+      }
+    ],
+    "automations": []
+  },
+  "zal": {
+    "title": "Зал",
+    "icon": "🛋",
+    "entities": [
+      {
+        "id": "light.nochnik_2",
+        "title": "Зал Подсветка растений телевизор",
+        "type": "light"
+      },
+      {
+        "id": "light.schetchik_vannaia",
+        "title": "Подсветка стеллаж зал",
+        "type": "light"
+      },
+      {
+        "id": "light.torsher_zal",
+        "title": "Торшер зал",
+        "type": "light"
+      },
+      {
+        "id": "switch.zal_podsvetka_rastenii_switch_1",
+        "title": "Зал Подсветка растений Switch 1",
+        "type": "switch"
+      },
+      {
+        "id": "switch.sonoff_1000638b7f",
+        "title": "Подсветка стеллаж зал",
+        "type": "switch"
+      },
+      {
+        "id": "switch.torsher_zal",
+        "title": "Торшер зал",
+        "type": "switch"
+      }
+    ],
+    "automations": [
+      {
+        "id": "automation.zal_uvlazhnitel_vykliuchit",
+        "title": "Зал увлажнитель Выключить"
+      },
+      {
+        "id": "automation.zal_uvlazhnitel_vkliuchit",
+        "title": "Зал увлажнитель включить"
+      },
+      {
+        "id": "automation.zal_uvlazhnitel_vykliuchit_2",
+        "title": "Зал увлажнитель включить"
+      },
+      {
+        "id": "automation.zal_uvlazhnitel_vykliuchatel",
+        "title": "Зал увлажнитель выключатель"
+      },
+      {
+        "id": "automation.test_zal",
+        "title": "Светильник в зале включить"
+      },
+      {
+        "id": "automation.test_zal_2",
+        "title": "Светильник в зале выключить"
+      }
+    ]
+  }
+}

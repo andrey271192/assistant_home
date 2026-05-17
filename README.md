@@ -43,6 +43,14 @@ Mini App живёт на отдельном HTTPS (например `https://kee
 - `server/data/rooms.json` — комнаты и `entity_id` (свет, switch, climate…)
 - `server/data/access.json` — кто какие комнаты видит (`rooms: ["*"]` = всё для admin)
 
+Обновить комнаты из HA:
+
+```bash
+.venv/bin/python scripts/build_rooms_from_ha.py
+```
+
+(нужны `HA_URL` и `HA_TOKEN` в `server/.env`)
+
 Узнать свой Telegram ID: напишите боту [@userinfobot](https://t.me/userinfobot).
 
 ## API (Mini App)
