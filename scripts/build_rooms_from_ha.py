@@ -1,10 +1,9 @@
 #!/usr/bin/env python3
-"""Build server/data/rooms.json from Home Assistant (areas + states)."""
+"""Build server/data/rooms.json: rooms → devices (control) + status + automations."""
 from __future__ import annotations
 
 import json
 import os
-import re
 import sys
 from collections import defaultdict
 from pathlib import Path
@@ -17,7 +16,7 @@ OUT = ROOT / "server" / "data" / "rooms.json"
 CONTROL_DOMAINS = frozenset(
     {"light", "switch", "cover", "climate", "fan", "input_boolean", "media_player", "scene"}
 )
-STATUS_DOMAINS = frozenset({"binary_sensor"})
+STATUS_DOMAIN = "binary_sensor"
 AUTOMATION_DOMAIN = "automation"
 SKIP_DOMAINS = frozenset(
     {
@@ -41,6 +40,10 @@ SKIP_DOMAINS = frozenset(
         "moon",
     }
 )
+# Служебные зоны без «домашних» кнопок
+SKIP_AREAS = frozenset(
+    {"server_nas", "keenetic", "ustroistva", "shkola_nas", "kamera", "printer"}
+)
 
 AREA_ICONS = {
     "gostinaia": "🛋",
@@ -51,15 +54,30 @@ AREA_ICONS = {
     "prikhozhaia": "🚪",
     "koridor": "🚪",
     "kabinet": "💼",
+    "kabinet_balkon": "💼",
+    "kabinet_lera": "💼",
     "balkon": "🌿",
+    "balkon_stellazh": "🌿",
     "ulitsa": "🌳",
     "server": "🖥",
-    "server_nas": "💾",
+    "obshchee": "⚙️",
 }
 
-
-def _slug(s: str) -> str:
-    return re.sub(r"[^a-z0-9_]", "_", (s or "").lower()).strip("_")
+STATUS_DEVICE_CLASSES = frozenset(
+    {
+        "door",
+        "window",
+        "opening",
+        "motion",
+        "occupancy",
+        "presence",
+        "moisture",
+        "smoke",
+        "gas",
+        "problem",
+        "safety",
+    }
+)
 
 
 def _ha_client() -> tuple[str, str]:
@@ -99,37 +117,37 @@ def main() -> None:
     headers = {"Authorization": f"Bearer {token}", "Content-Type": "application/json"}
 
     area_names: dict[str, str] = {}
-    raw_names = _template(
-        url,
-        headers,
-        '{% for a in areas() %}{{ a }}|{{ area_name(a) }}\n{% endfor %}',
-    )
-    for line in raw_names.splitlines():
-        if "|" not in line:
-            continue
-        aid, name = line.split("|", 1)
-        area_names[aid.strip()] = name.strip()
+    for line in _template(
+        url, headers, '{% for a in areas() %}{{ a }}|{{ area_name(a) }}\n{% endfor %}'
+    ).splitlines():
+        if "|" in line:
+            aid, name = line.split("|", 1)
+            area_names[aid.strip()] = name.strip()
 
     area_entities: dict[str, list[str]] = defaultdict(list)
-    raw_map = _template(
+    for line in _template(
         url,
         headers,
         '{% for area in areas() %}{% for e in area_entities(area) %}{{ area }}|{{ e }}\n{% endfor %}{% endfor %}',
-    )
-    for line in raw_map.splitlines():
-        if "|" not in line:
-            continue
-        aid, eid = line.split("|", 1)
-        area_entities[aid.strip()].append(eid.strip())
+    ).splitlines():
+        if "|" in line:
+            aid, eid = line.split("|", 1)
+            area_entities[aid.strip()].append(eid.strip())
 
     r = httpx.get(f"{url}/api/states", headers=headers, timeout=60.0)
     r.raise_for_status()
     states = {s["entity_id"]: s for s in r.json()}
 
+    assigned_autos: set[str] = set()
     rooms: dict = {}
+
     for area_id in sorted(area_entities.keys()):
-        ents = []
-        autos = []
+        if area_id in SKIP_AREAS:
+            continue
+        devices: list[dict] = []
+        status: list[dict] = []
+        autos: list[dict] = []
+
         for eid in area_entities[area_id]:
             st = states.get(eid)
             if not st:
@@ -139,48 +157,60 @@ def main() -> None:
                 continue
             attrs = st.get("attributes") or {}
             title = (attrs.get("friendly_name") or eid).strip()
-            hidden = attrs.get("hidden") or attrs.get("entity_registry_visible_default") is False
-            if hidden:
+            if attrs.get("hidden"):
                 continue
+
             if domain == AUTOMATION_DOMAIN:
                 autos.append({"id": eid, "title": title})
+                assigned_autos.add(eid)
                 continue
-            if domain not in CONTROL_DOMAINS and domain not in STATUS_DOMAINS:
+            if domain in CONTROL_DOMAINS:
+                devices.append({"id": eid, "title": title, "type": domain})
                 continue
-            if domain in STATUS_DOMAINS:
-                device_class = attrs.get("device_class") or ""
-                if device_class not in (
-                    "door",
-                    "window",
-                    "opening",
-                    "motion",
-                    "occupancy",
-                    "presence",
-                    "moisture",
-                    "smoke",
-                    "gas",
-                    "problem",
-                    "safety",
-                ):
-                    continue
-            ents.append({"id": eid, "title": title, "type": domain})
+            if domain == STATUS_DOMAIN:
+                dc = attrs.get("device_class") or ""
+                if dc in STATUS_DEVICE_CLASSES:
+                    status.append({"id": eid, "title": title, "type": domain})
 
-        if not ents and not autos:
+        if not devices and not autos and not status:
             continue
 
-        title = area_names.get(area_id) or area_id.replace("_", " ").title()
         rooms[area_id] = {
-            "title": title,
+            "title": area_names.get(area_id) or area_id.replace("_", " ").title(),
             "icon": AREA_ICONS.get(area_id, "🏠"),
-            "entities": sorted(ents, key=lambda x: (x["type"], x["title"])),
+            "entities": sorted(devices, key=lambda x: (x["type"], x["title"])),
+            "status": sorted(status, key=lambda x: x["title"]),
             "automations": sorted(autos, key=lambda x: x["title"]),
+        }
+
+    orphans: list[dict] = []
+    for eid, st in states.items():
+        if not eid.startswith("automation."):
+            continue
+        if eid in assigned_autos:
+            continue
+        attrs = st.get("attributes") or {}
+        title = (attrs.get("friendly_name") or eid).strip()
+        orphans.append({"id": eid, "title": title})
+
+    if orphans:
+        rooms["obshchee"] = {
+            "title": "Общие",
+            "icon": "⚙️",
+            "entities": [],
+            "status": [],
+            "automations": sorted(orphans, key=lambda x: x["title"]),
         }
 
     OUT.parent.mkdir(parents=True, exist_ok=True)
     OUT.write_text(json.dumps(rooms, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
-    n_ent = sum(len(v.get("entities") or []) for v in rooms.values())
+    n_dev = sum(len(v.get("entities") or []) for v in rooms.values())
+    n_st = sum(len(v.get("status") or []) for v in rooms.values())
     n_auto = sum(len(v.get("automations") or []) for v in rooms.values())
-    print(f"Wrote {OUT}: {len(rooms)} rooms, {n_ent} entities, {n_auto} automations")
+    print(
+        f"Wrote {OUT}: {len(rooms)} rooms, "
+        f"{n_dev} devices, {n_st} sensors, {n_auto} automations"
+    )
 
 
 if __name__ == "__main__":

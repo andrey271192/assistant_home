@@ -112,35 +112,46 @@ async def tg_rooms(request: Request):
     return {"ok": True, "rooms": rooms}
 
 
+def _merge_states(items: list[dict], states_map: dict[str, dict]) -> list[dict]:
+    out: list[dict] = []
+    for ent in items:
+        eid = ent["id"]
+        summ = states_map.get(eid) or {
+            "entity_id": eid,
+            "state": "unavailable",
+            "state_label": "Нет связи",
+            "friendly_name": ent.get("title") or eid,
+            "domain": ent.get("type") or "switch",
+            "unit": "",
+            "is_on": False,
+            "controllable": ha.is_controllable(eid),
+        }
+        out.append({**ent, **summ})
+    return out
+
+
 @router.get("/room/{room_id}")
 async def tg_room(room_id: str, request: Request):
     user_id, _ = _resolve_user(request)
     detail = acl.room_detail(user_id, room_id)
     if not detail:
         raise HTTPException(404, "Комната не найдена или нет доступа")
-    ids = [e["id"] for e in detail.get("entities") or []]
-    states = await ha.get_states(ids)
+    all_ids = (
+        [e["id"] for e in detail.get("entities") or []]
+        + [e["id"] for e in detail.get("status") or []]
+        + [a["id"] for a in detail.get("automations") or []]
+    )
+    states = await ha.get_states(all_ids)
     by_id = {s.get("entity_id"): ha.state_summary(s) for s in states}
-    entities = []
-    for ent in detail.get("entities") or []:
-        eid = ent["id"]
-        summ = by_id.get(eid) or {
-            "entity_id": eid,
-            "state": "unavailable",
-            "friendly_name": ent.get("title") or eid,
-            "domain": ent.get("type") or "switch",
-            "unit": "",
-            "is_on": False,
-        }
-        entities.append({**ent, **summ})
     return {
         "ok": True,
         "room": {
             "id": detail["id"],
             "title": detail["title"],
             "icon": detail["icon"],
-            "entities": entities,
-            "automations": detail.get("automations") or [],
+            "entities": _merge_states(detail.get("entities") or [], by_id),
+            "status": _merge_states(detail.get("status") or [], by_id),
+            "automations": _merge_states(detail.get("automations") or [], by_id),
         },
     }
 
@@ -160,7 +171,7 @@ async def tg_toggle(request: Request, body: dict):
 
 
 @router.post("/automation/trigger")
-async def tg_automation(request: Request, body: dict):
+async def tg_automation_trigger(request: Request, body: dict):
     user_id, _ = _resolve_user(request, body)
     _require_pin(user_id)
     eid = (body.get("entity_id") or "").strip()
@@ -168,6 +179,21 @@ async def tg_automation(request: Request, body: dict):
         raise HTTPException(403, "Автоматизация недоступна")
     try:
         await ha.trigger_automation(eid)
-        return {"ok": True, "entity_id": eid}
+        return {"ok": True, "entity_id": eid, "action": "trigger"}
+    except ha.HAError as e:
+        raise HTTPException(502, str(e)) from e
+
+
+@router.post("/automation/toggle")
+async def tg_automation_toggle(request: Request, body: dict):
+    """Включить/выключить автоматизацию (automation.turn_on/off)."""
+    user_id, _ = _resolve_user(request, body)
+    _require_pin(user_id)
+    eid = (body.get("entity_id") or "").strip()
+    if not eid or not acl.automation_allowed(user_id, eid):
+        raise HTTPException(403, "Автоматизация недоступна")
+    try:
+        st = await ha.toggle_automation_enabled(eid)
+        return {"ok": True, "entity": ha.state_summary(st)}
     except ha.HAError as e:
         raise HTTPException(502, str(e)) from e

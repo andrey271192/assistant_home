@@ -10,6 +10,10 @@ from .. import config
 
 logger = logging.getLogger("assistant_home.ha")
 
+CONTROLLABLE_DOMAINS = frozenset(
+    {"light", "switch", "cover", "climate", "fan", "input_boolean", "media_player", "scene"}
+)
+
 
 class HAError(Exception):
     pass
@@ -96,12 +100,45 @@ async def set_entity(entity_id: str, turn_on: bool) -> None:
             raise HAError(f"HA service {domain}.{service}: {r.status_code} {r.text[:200]}")
 
 
+def is_controllable(entity_id: str) -> bool:
+    domain = str(entity_id).split(".")[0]
+    return domain in CONTROLLABLE_DOMAINS
+
+
 async def toggle_entity(entity_id: str) -> dict[str, Any]:
+    if not is_controllable(entity_id):
+        raise HAError("Entity is read-only")
     st = await get_state(entity_id)
     state = (st.get("state") or "off").lower()
-    on = state in ("off", "closed", "unavailable", "unknown")
+    domain = str(entity_id).split(".")[0]
+    if domain == "fan":
+        on = state in ("off", "unavailable", "unknown")
+    else:
+        on = state in ("off", "closed", "unavailable", "unknown")
     await set_entity(entity_id, on)
     return await get_state(entity_id)
+
+
+async def set_automation_enabled(entity_id: str, enabled: bool) -> dict[str, Any]:
+    eid = str(entity_id)
+    if not eid.startswith("automation."):
+        raise HAError("Not an automation entity")
+    service = "turn_on" if enabled else "turn_off"
+    async with httpx.AsyncClient(timeout=20.0) as client:
+        r = await client.post(
+            f"{_base()}/api/services/automation/{service}",
+            headers=_headers(),
+            json={"entity_id": eid},
+        )
+        if r.status_code >= 400:
+            raise HAError(f"automation.{service}: {r.status_code} {r.text[:200]}")
+    return await get_state(eid)
+
+
+async def toggle_automation_enabled(entity_id: str) -> dict[str, Any]:
+    st = await get_state(entity_id)
+    enabled = (st.get("state") or "off").lower() == "on"
+    return await set_automation_enabled(entity_id, not enabled)
 
 
 async def trigger_automation(entity_id: str) -> None:
@@ -118,6 +155,22 @@ async def trigger_automation(entity_id: str) -> None:
             raise HAError(f"automation.trigger: {r.status_code} {r.text[:200]}")
 
 
+def state_label(state: str, domain: str = "") -> str:
+    s = (state or "unknown").lower()
+    if domain == "binary_sensor":
+        if s == "on":
+            return "Сработал"
+        if s == "off":
+            return "Норма"
+    if s in ("on", "open", "heat", "cool", "playing", "home"):
+        return "Вкл"
+    if s in ("off", "closed"):
+        return "Выкл"
+    if s == "unavailable":
+        return "Нет связи"
+    return state
+
+
 def state_summary(st: dict[str, Any]) -> dict[str, Any]:
     attrs = st.get("attributes") or {}
     eid = st.get("entity_id") or ""
@@ -125,11 +178,22 @@ def state_summary(st: dict[str, Any]) -> dict[str, Any]:
     state = st.get("state") or "unknown"
     friendly = attrs.get("friendly_name") or eid
     unit = attrs.get("unit_of_measurement") or ""
+    sl = state.lower()
+    if domain == "fan":
+        is_on = sl not in ("off", "unavailable", "unknown")
+    elif domain == "binary_sensor":
+        is_on = sl == "on"
+    elif domain == "automation":
+        is_on = sl == "on"
+    else:
+        is_on = sl in ("on", "open", "heat", "cool", "playing", "home")
     return {
         "entity_id": eid,
         "state": state,
+        "state_label": state_label(state, domain),
         "friendly_name": friendly,
         "domain": domain,
         "unit": unit,
-        "is_on": state in ("on", "open", "heat", "cool", "playing", "home"),
+        "is_on": is_on,
+        "controllable": is_controllable(eid),
     }

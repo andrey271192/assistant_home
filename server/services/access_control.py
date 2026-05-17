@@ -39,7 +39,6 @@ def is_admin(user_id: str) -> bool:
 
 
 def allowed_room_ids(user_id: str) -> list[str] | None:
-    """None means all rooms (admin or wildcard)."""
     if is_admin(user_id):
         return None
     rec = user_record(user_id)
@@ -47,6 +46,22 @@ def allowed_room_ids(user_id: str) -> list[str] | None:
     if "*" in rooms:
         return None
     return [str(r) for r in rooms]
+
+
+def _parse_entity_list(items: list) -> list[dict[str, Any]]:
+    out: list[dict[str, Any]] = []
+    for ent in items or []:
+        if isinstance(ent, str):
+            out.append({"id": ent, "title": ent, "type": _guess_type(ent)})
+        elif isinstance(ent, dict) and ent.get("id"):
+            out.append(
+                {
+                    "id": str(ent["id"]),
+                    "title": ent.get("title") or ent["id"],
+                    "type": ent.get("type") or _guess_type(str(ent["id"])),
+                }
+            )
+    return out
 
 
 def list_rooms_for_user(user_id: str) -> list[dict[str, Any]]:
@@ -58,11 +73,17 @@ def list_rooms_for_user(user_id: str) -> list[dict[str, Any]]:
             continue
         if not isinstance(meta, dict):
             continue
+        dev = len(meta.get("entities") or [])
+        st = len(meta.get("status") or [])
+        auto = len(meta.get("automations") or [])
         out.append(
             {
                 "id": rid,
                 "title": meta.get("title") or rid,
                 "icon": meta.get("icon") or "🏠",
+                "device_count": dev,
+                "status_count": st,
+                "automation_count": auto,
             }
         )
     out.sort(key=lambda x: (x.get("title") or "").lower())
@@ -76,44 +97,31 @@ def room_detail(user_id: str, room_id: str) -> dict[str, Any] | None:
     meta = _rooms().get(room_id)
     if not isinstance(meta, dict):
         return None
-    entities = []
-    for ent in meta.get("entities") or []:
-        if isinstance(ent, str):
-            entities.append({"id": ent, "title": ent, "type": _guess_type(ent)})
-        elif isinstance(ent, dict) and ent.get("id"):
-            entities.append(
-                {
-                    "id": str(ent["id"]),
-                    "title": ent.get("title") or ent["id"],
-                    "type": ent.get("type") or _guess_type(str(ent["id"])),
-                }
-            )
-    automations = []
-    for auto in meta.get("automations") or []:
-        if isinstance(auto, str):
-            automations.append({"id": auto, "title": auto})
-        elif isinstance(auto, dict) and auto.get("id"):
-            automations.append(
-                {"id": str(auto["id"]), "title": auto.get("title") or auto["id"]}
-            )
     return {
         "id": room_id,
         "title": meta.get("title") or room_id,
         "icon": meta.get("icon") or "🏠",
-        "entities": entities,
-        "automations": automations,
+        "entities": _parse_entity_list(meta.get("entities") or []),
+        "status": _parse_entity_list(meta.get("status") or []),
+        "automations": _parse_entity_list(meta.get("automations") or []),
     }
+
+
+def _entity_in_room_lists(detail: dict[str, Any], entity_id: str) -> bool:
+    eid = str(entity_id)
+    for key in ("entities", "status"):
+        for ent in detail.get(key) or []:
+            if ent.get("id") == eid:
+                return True
+    return False
 
 
 def entity_allowed(user_id: str, entity_id: str) -> bool:
     eid = str(entity_id)
     for rid in _rooms():
         detail = room_detail(user_id, rid)
-        if not detail:
-            continue
-        for ent in detail.get("entities") or []:
-            if ent.get("id") == eid:
-                return True
+        if detail and _entity_in_room_lists(detail, eid):
+            return True
     return False
 
 
@@ -130,4 +138,4 @@ def automation_allowed(user_id: str, entity_id: str) -> bool:
 
 
 def _guess_type(entity_id: str) -> str:
-    return (entity_id.split(".")[0] if "." in entity_id else "switch")
+    return entity_id.split(".")[0] if "." in entity_id else "switch"

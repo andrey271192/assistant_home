@@ -9,6 +9,7 @@
     :root {
       --bg: #121018; --card: #1e1a28; --border: rgba(180, 140, 255, 0.25);
       --accent: #b388ff; --text: #f5f0ff; --muted: #9a8fb0; --off: #5c5470;
+      --warn: #ffab40; --ok: #69f0ae;
     }
     * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
     body { margin: 0; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
@@ -22,9 +23,10 @@
       border: 1px solid var(--border); border-radius: 14px; background: var(--card); color: var(--text);
       text-align: left; cursor: pointer; font-size: 16px;
     }
-    .ico { font-size: 28px; width: 36px; text-align: center; }
+    .card.static { cursor: default; }
+    .ico { font-size: 26px; width: 36px; text-align: center; flex-shrink: 0; }
     .row-body { flex: 1; min-width: 0; }
-    .row-title { font-weight: 600; }
+    .row-title { font-weight: 600; font-size: 15px; }
     .row-meta { font-size: 12px; color: var(--muted); margin-top: 4px; }
     .toggle {
       width: 52px; height: 30px; border-radius: 999px; border: none; flex-shrink: 0;
@@ -36,8 +38,21 @@
       border-radius: 50%; background: #fff; transition: transform .2s;
     }
     .toggle.on::after { transform: translateX(22px); }
+    .pill {
+      font-size: 11px; padding: 4px 10px; border-radius: 999px; flex-shrink: 0;
+      background: rgba(255,255,255,0.08); color: var(--muted);
+    }
+    .pill.on { background: rgba(255, 171, 64, 0.2); color: var(--warn); }
+    .pill.ok { background: rgba(105, 240, 174, 0.15); color: var(--ok); }
+    .btn-sm {
+      border: 1px solid var(--border); background: var(--accent); color: #1a1028;
+      border-radius: 10px; padding: 8px 12px; font-size: 13px; font-weight: 600; flex-shrink: 0;
+    }
+    .btn-sm.ghost { background: transparent; color: var(--accent); }
+    .auto-actions { display: flex; gap: 8px; align-items: center; flex-shrink: 0; }
     .back { background: none; border: none; color: var(--accent); font-size: 15px; padding: 8px 0; cursor: pointer; }
     .sec { font-size: 11px; letter-spacing: .1em; text-transform: uppercase; color: var(--accent); margin: 20px 0 8px; }
+    .sec:first-of-type { margin-top: 8px; }
     .pin-dots { font-size: 28px; letter-spacing: 8px; text-align: center; margin: 16px 0; }
     .pin-pad { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; max-width: 280px; margin: 0 auto; }
     .pin-pad button { padding: 16px; font-size: 20px; border-radius: 12px; border: 1px solid var(--border);
@@ -45,13 +60,14 @@
     .pin-pad button.ok { background: var(--accent); color: #1a1028; font-weight: 700; }
     .err { color: #ff8a80; font-size: 13px; text-align: center; margin-top: 10px; }
     .gate { text-align: center; padding: 40px 16px; color: var(--muted); }
+    .empty { color: var(--muted); font-size: 13px; padding: 8px 0 16px; }
   </style>
 </head>
 <body>
 <div id="gate" class="gate hidden"><p id="gate-msg">Откройте приложение из Telegram-бота</p></div>
 <div id="pin-screen" class="wrap hidden">
   <h1>PIN</h1>
-  <p class="sub">Для переключателей и автоматизаций</p>
+  <p class="sub">Для управления устройствами и автоматизациями</p>
   <div class="pin-dots" id="pin-dots">—</div>
   <div class="pin-pad" id="pin-pad"></div>
   <p class="err" id="pin-err"></p>
@@ -64,10 +80,12 @@
     <div id="rooms-list"></div>
   </div>
   <div id="view-room" class="hidden">
-    <button type="button" class="back" id="btn-back">← Назад</button>
+    <button type="button" class="back" id="btn-back">← Комнаты</button>
     <h1 id="room-title">Комната</h1>
     <div class="sec">Устройства</div>
     <div id="entities-list"></div>
+    <div class="sec" id="sec-status">Датчики</div>
+    <div id="status-list"></div>
     <div class="sec">Автоматизации</div>
     <div id="autos-list"></div>
   </div>
@@ -76,7 +94,7 @@
 (function(){
   const tg = window.Telegram?.WebApp;
   if (tg) { tg.ready(); tg.expand(); tg.setHeaderColor('#121018'); tg.setBackgroundColor('#121018'); }
-  let sessionToken = '', pinEntry = '', pinRequired = true;
+  let sessionToken = '', pinEntry = '';
   const bootstrap = new URLSearchParams(location.search).get('b') || '';
   const pathBase = (function(){
     const p = location.pathname || '';
@@ -84,6 +102,7 @@
     return i > 0 ? p.slice(0, i) : '';
   })();
   const apiBase = location.origin + pathBase + '/api/tg';
+
   function initData(){ return tg?.initData || ''; }
   function authBody(extra){ return Object.assign({}, extra||{}, initData() ? {init_data: initData()} : {}, bootstrap ? {bootstrap} : {}); }
   function hdr(){
@@ -93,12 +112,15 @@
     return h;
   }
   async function api(path, opts){
-    const r = await fetch(location.origin + '/api/tg' + path, {...opts, headers: {...hdr(), ...(opts?.headers||{})}});
+    const r = await fetch(apiBase + path, {...opts, headers: {...hdr(), ...(opts?.headers||{})}});
     const j = await r.json().catch(() => ({}));
     if (!r.ok) throw new Error(j.detail || r.statusText);
     return j;
   }
   function esc(s){ return String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;'); }
+  function stateText(ent){
+    return ent.state_label || ent.state || '—';
+  }
   function showGate(on, msg){
     document.getElementById('gate').classList.toggle('hidden', !on);
     document.getElementById('pin-screen').classList.add('hidden');
@@ -143,14 +165,20 @@
     try {
       const j = await api('/auth', { method:'POST', body: JSON.stringify(authBody()) });
       sessionToken = j.session_token || '';
-      pinRequired = !!j.pin_required;
       const me = await api('/me');
       document.getElementById('user-line').textContent =
         (me.name ? me.name + ' · ' : '') + (me.role === 'admin' ? 'админ' : 'гость');
-      if (pinRequired && !j.pin_ok) { showPin(true); return; }
+      if (j.pin_required && !j.pin_ok) { showPin(true); return; }
       showPin(false);
       await loadHome();
     } catch(e) { showGate(true, e.message); }
+  }
+  function roomSubtitle(r){
+    const p = [];
+    if (r.device_count) p.push(r.device_count + ' устр.');
+    if (r.automation_count) p.push(r.automation_count + ' авто.');
+    if (r.status_count) p.push(r.status_count + ' датч.');
+    return p.join(' · ') || 'пусто';
   }
   async function loadHome(){
     document.getElementById('view-home').classList.remove('hidden');
@@ -161,11 +189,25 @@
     (j.rooms || []).forEach(r => {
       const b = document.createElement('button');
       b.type = 'button'; b.className = 'card';
-      b.innerHTML = '<span class="ico">' + esc(r.icon) + '</span><span class="row-body"><span class="row-title">' + esc(r.title) + '</span></span><span>›</span>';
+      b.innerHTML = '<span class="ico">' + esc(r.icon) + '</span><span class="row-body"><span class="row-title">' + esc(r.title) +
+        '</span><span class="row-meta">' + esc(roomSubtitle(r)) + '</span></span><span>›</span>';
       b.onclick = () => openRoom(r.id);
       el.appendChild(b);
     });
-    if (!(j.rooms||[]).length) el.innerHTML = '<p class="sub">Нет комнат — настройте server/data/rooms.json</p>';
+    if (!(j.rooms||[]).length) el.innerHTML = '<p class="empty">Нет комнат — запустите scripts/build_rooms_from_ha.py</p>';
+  }
+  function deviceRow(ent, onToggle){
+    const row = document.createElement('div');
+    row.className = 'card static';
+    row.innerHTML = '<span class="row-body"><span class="row-title">' + esc(ent.title || ent.friendly_name) +
+      '</span><span class="row-meta">' + esc(stateText(ent)) + '</span></span>';
+    if (ent.controllable !== false) {
+      const btn = document.createElement('button');
+      btn.type = 'button'; btn.className = 'toggle' + (ent.is_on ? ' on' : '');
+      btn.onclick = onToggle(btn, ent);
+      row.appendChild(btn);
+    }
+    return row;
   }
   async function openRoom(id){
     const j = await api('/room/' + encodeURIComponent(id));
@@ -173,47 +215,84 @@
     document.getElementById('view-home').classList.add('hidden');
     document.getElementById('view-room').classList.remove('hidden');
     document.getElementById('room-title').textContent = (room.icon || '') + ' ' + (room.title || id);
+
     const entEl = document.getElementById('entities-list');
     entEl.innerHTML = '';
-    (room.entities || []).forEach(ent => {
-      const row = document.createElement('div');
-      row.className = 'card';
-      const meta = ent.unit ? ent.state + ' ' + ent.unit : ent.state;
-      row.innerHTML = '<span class="row-body"><span class="row-title">' + esc(ent.title || ent.friendly_name) + '</span><span class="row-meta">' + esc(meta) + '</span></span>';
-      const btn = document.createElement('button');
-      btn.type = 'button'; btn.className = 'toggle' + (ent.is_on ? ' on' : '');
-      btn.onclick = async () => {
+    const devices = room.entities || [];
+    if (!devices.length) entEl.innerHTML = '<p class="empty">Нет управляемых устройств</p>';
+    devices.forEach(ent => {
+      entEl.appendChild(deviceRow(ent, (btn, e) => async () => {
         try {
-          const t = await api('/entity/toggle', { method:'POST', body: JSON.stringify({ entity_id: ent.entity_id || ent.id }) });
+          const t = await api('/entity/toggle', { method:'POST', body: JSON.stringify({ entity_id: e.entity_id || e.id }) });
           btn.classList.toggle('on', !!t.entity?.is_on);
+          const meta = btn.parentElement.querySelector('.row-meta');
+          if (meta) meta.textContent = t.entity?.state_label || t.entity?.state || '';
           tg?.HapticFeedback?.impactOccurred('light');
-        } catch(e) {
-          if (String(e.message).includes('PIN')) showPin(true);
-          else alert(e.message);
+        } catch(err) {
+          if (String(err.message).includes('PIN')) showPin(true);
+          else tg?.showAlert?.(err.message) || alert(err.message);
         }
-      };
-      row.appendChild(btn);
-      entEl.appendChild(row);
+      }));
     });
+
+    const status = room.status || [];
+    document.getElementById('sec-status').classList.toggle('hidden', !status.length);
+    const stEl = document.getElementById('status-list');
+    stEl.innerHTML = '';
+    status.forEach(ent => {
+      const row = document.createElement('div');
+      row.className = 'card static';
+      const pillCls = ent.is_on ? 'pill on' : 'pill ok';
+      row.innerHTML = '<span class="row-body"><span class="row-title">' + esc(ent.title || ent.friendly_name) +
+        '</span></span><span class="' + pillCls + '">' + esc(stateText(ent)) + '</span>';
+      stEl.appendChild(row);
+    });
+
     const autoEl = document.getElementById('autos-list');
     autoEl.innerHTML = '';
-    (room.automations || []).forEach(a => {
-      const b = document.createElement('button');
-      b.type = 'button'; b.className = 'card';
-      b.innerHTML = '<span class="ico">⚡</span><span class="row-body"><span class="row-title">' + esc(a.title) + '</span><span class="row-meta">Запустить</span></span>';
-      b.onclick = async () => {
-        if (!confirm('Запустить «' + (a.title||a.id) + '»?')) return;
+    const autos = room.automations || [];
+    if (!autos.length) autoEl.innerHTML = '<p class="empty">Нет автоматизаций в этой комнате</p>';
+    autos.forEach(a => {
+      const row = document.createElement('div');
+      row.className = 'card static';
+      row.innerHTML = '<span class="ico">⚡</span><span class="row-body"><span class="row-title">' + esc(a.title || a.friendly_name) +
+        '</span><span class="row-meta">' + esc(stateText(a)) + '</span></span>';
+      const actions = document.createElement('div');
+      actions.className = 'auto-actions';
+      const run = document.createElement('button');
+      run.type = 'button'; run.className = 'btn-sm';
+      run.textContent = '▶';
+      run.title = 'Запустить';
+      run.onclick = async () => {
         try {
-          await api('/automation/trigger', { method:'POST', body: JSON.stringify({ entity_id: a.id }) });
+          await api('/automation/trigger', { method:'POST', body: JSON.stringify({ entity_id: a.entity_id || a.id }) });
           tg?.HapticFeedback?.notificationOccurred('success');
-        } catch(e) {
-          if (String(e.message).includes('PIN')) showPin(true);
-          else alert(e.message);
+          tg?.showPopup?.({ message: 'Запущено', buttons: [{ type: 'ok' }] });
+        } catch(err) {
+          if (String(err.message).includes('PIN')) showPin(true);
+          else tg?.showAlert?.(err.message) || alert(err.message);
         }
       };
-      autoEl.appendChild(b);
+      const en = document.createElement('button');
+      en.type = 'button'; en.className = 'toggle' + (a.is_on ? ' on' : '');
+      en.title = 'Вкл/выкл автоматизацию';
+      en.onclick = async () => {
+        try {
+          const t = await api('/automation/toggle', { method:'POST', body: JSON.stringify({ entity_id: a.entity_id || a.id }) });
+          en.classList.toggle('on', !!t.entity?.is_on);
+          const meta = row.querySelector('.row-meta');
+          if (meta) meta.textContent = t.entity?.state_label || t.entity?.state || '';
+          tg?.HapticFeedback?.impactOccurred('medium');
+        } catch(err) {
+          if (String(err.message).includes('PIN')) showPin(true);
+          else tg?.showAlert?.(err.message) || alert(err.message);
+        }
+      };
+      actions.appendChild(run);
+      actions.appendChild(en);
+      row.appendChild(actions);
+      autoEl.appendChild(row);
     });
-    if (!(room.automations||[]).length) autoEl.innerHTML = '<p class="sub">Нет автоматизаций в конфиге</p>';
   }
   document.getElementById('btn-back').onclick = loadHome;
   renderPinPad();

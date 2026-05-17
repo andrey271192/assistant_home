@@ -44,6 +44,7 @@
         "type": "switch"
       }
     ],
+    "status": [],
     "automations": []
   },
   "cherepakha": {
@@ -76,17 +77,13 @@
         "type": "switch"
       }
     ],
+    "status": [],
     "automations": []
   },
   "gostinaia": {
     "title": "Гостиная",
     "icon": "🛋",
     "entities": [
-      {
-        "id": "binary_sensor.datchik_vody_moisture",
-        "title": "Вода зал Wifi Влага",
-        "type": "binary_sensor"
-      },
       {
         "id": "fan.dmaker_p45_c3c2_fan",
         "title": "Вентилятор Fan",
@@ -163,27 +160,19 @@
         "type": "switch"
       }
     ],
+    "status": [
+      {
+        "id": "binary_sensor.datchik_vody_moisture",
+        "title": "Вода зал Wifi Влага",
+        "type": "binary_sensor"
+      }
+    ],
     "automations": []
   },
   "kabinet": {
     "title": "Кабинет",
     "icon": "💼",
     "entities": [
-      {
-        "id": "binary_sensor.4bbde4a8_df9709ef",
-        "title": "binary_sensor.4bbde4a8_df9709ef",
-        "type": "binary_sensor"
-      },
-      {
-        "id": "binary_sensor.wifishui_jin_chuan_gan_qi_moisture_2",
-        "title": "Вода кабинет Wifi Влага",
-        "type": "binary_sensor"
-      },
-      {
-        "id": "binary_sensor.649e31894853_occupancy",
-        "title": "Датчик присутствия  Occupancy",
-        "type": "binary_sensor"
-      },
       {
         "id": "cover.zhi_neng_chuang_lian_dian_ji_curtain",
         "title": "Шторы Штора",
@@ -315,6 +304,23 @@
         "type": "switch"
       }
     ],
+    "status": [
+      {
+        "id": "binary_sensor.4bbde4a8_df9709ef",
+        "title": "binary_sensor.4bbde4a8_df9709ef",
+        "type": "binary_sensor"
+      },
+      {
+        "id": "binary_sensor.wifishui_jin_chuan_gan_qi_moisture_2",
+        "title": "Вода кабинет Wifi Влага",
+        "type": "binary_sensor"
+      },
+      {
+        "id": "binary_sensor.649e31894853_occupancy",
+        "title": "Датчик присутствия  Occupancy",
+        "type": "binary_sensor"
+      }
+    ],
     "automations": [
       {
         "id": "automation.kabinet_vykliuchatel_vkliuchit",
@@ -330,11 +336,6 @@
     "title": "Коридор",
     "icon": "🚪",
     "entities": [
-      {
-        "id": "binary_sensor.datchik_dvizheniia_xiaomi_occupancy",
-        "title": "Датчик движения xiaomi Занятость",
-        "type": "binary_sensor"
-      },
       {
         "id": "light.koridor_vykliuchatel_1",
         "title": "Коридор подсветка растений Switch 1",
@@ -541,6 +542,13 @@
         "type": "switch"
       }
     ],
+    "status": [
+      {
+        "id": "binary_sensor.datchik_dvizheniia_xiaomi_occupancy",
+        "title": "Датчик движения xiaomi Занятость",
+        "type": "binary_sensor"
+      }
+    ],
     "automations": [
       {
         "id": "automation.koridor_vykliuchatel_pravaia_knopka_odno_nazhatie_vykl_vkl_liustra",
@@ -552,21 +560,6 @@
     "title": "Кухня",
     "icon": "🍳",
     "entities": [
-      {
-        "id": "binary_sensor.wifishui_jin_chuan_gan_qi_4_moisture",
-        "title": "Вода батарея кухня Wifi",
-        "type": "binary_sensor"
-      },
-      {
-        "id": "binary_sensor.wifishui_jin_chuan_gan_qi_2_moisture",
-        "title": "Вода кухня раковина Wifi Влага",
-        "type": "binary_sensor"
-      },
-      {
-        "id": "binary_sensor.voda",
-        "title": "Дверь",
-        "type": "binary_sensor"
-      },
       {
         "id": "light.musorka",
         "title": "Гирлянда зал окно",
@@ -693,6 +686,23 @@
         "type": "switch"
       }
     ],
+    "status": [
+      {
+        "id": "binary_sensor.wifishui_jin_chuan_gan_qi_4_moisture",
+        "title": "Вода батарея кухня Wifi",
+        "type": "binary_sensor"
+      },
+      {
+        "id": "binary_sensor.wifishui_jin_chuan_gan_qi_2_moisture",
+        "title": "Вода кухня раковина Wifi Влага",
+        "type": "binary_sensor"
+      },
+      {
+        "id": "binary_sensor.voda",
+        "title": "Дверь",
+        "type": "binary_sensor"
+      }
+    ],
     "automations": [
       {
         "id": "automation.alisa_avtomatizatsiia_vkliuchila",
@@ -729,6 +739,18 @@
     "icon": "🏠",
     "entities": [
       {
+        "id": "switch.starline_engine",
+        "title": "StarLine Двигатель",
+        "type": "switch"
+      },
+      {
+        "id": "switch.starline_service_mode",
+        "title": "StarLine Режим обслуживания",
+        "type": "switch"
+      }
+    ],
+    "status": [
+      {
         "id": "binary_sensor.starline_trunk",
         "title": "StarLine Багажник",
         "type": "binary_sensor"
@@ -742,16 +764,6 @@
         "id": "binary_sensor.starline_alarm",
         "title": "StarLine Сигнализация",
         "type": "binary_sensor"
-      },
-      {
-        "id": "switch.starline_engine",
-        "title": "StarLine Двигатель",
-        "type": "switch"
-      },
-      {
-        "id": "switch.starline_service_mode",
-        "title": "StarLine Режим обслуживания",
-        "type": "switch"
       }
     ],
     "automations": []
@@ -759,7 +771,8 @@
   "podezd": {
     "title": "Подъезд",
     "icon": "🏠",
-    "entities": [
+    "entities": [],
+    "status": [
       {
         "id": "binary_sensor.dvizhenie_kabinet_motion",
         "title": "Движение Подъезд Движение",
@@ -777,11 +790,6 @@
     "title": "Прихожая",
     "icon": "🚪",
     "entities": [
-      {
-        "id": "binary_sensor.dvizhenie_prikhozhaia_motion",
-        "title": "движение прихожая Движение",
-        "type": "binary_sensor"
-      },
       {
         "id": "light.prikhozhaia_liustra_2",
         "title": "Прихожая люстра",
@@ -803,54 +811,19 @@
         "type": "switch"
       }
     ],
+    "status": [
+      {
+        "id": "binary_sensor.dvizhenie_prikhozhaia_motion",
+        "title": "движение прихожая Движение",
+        "type": "binary_sensor"
+      }
+    ],
     "automations": [
       {
         "id": "automation.prikhozhaia_svetilnik",
         "title": "Прихожая светильник"
       }
     ]
-  },
-  "printer": {
-    "title": "Принтер",
-    "icon": "🏠",
-    "entities": [
-      {
-        "id": "binary_sensor.a1_03919d4c1900016_hms_errors",
-        "title": "Принтер_BambuLab HMS errors",
-        "type": "binary_sensor"
-      },
-      {
-        "id": "binary_sensor.a1_03919d4c1900016_print_error",
-        "title": "Принтер_BambuLab Print error",
-        "type": "binary_sensor"
-      },
-      {
-        "id": "fan.a1_03919d4c1900016_cooling_fan",
-        "title": "Принтер_BambuLab Cooling fan",
-        "type": "fan"
-      },
-      {
-        "id": "light.a1_03919d4c1900016_chamber_light",
-        "title": "Принтер_BambuLab Chamber light",
-        "type": "light"
-      },
-      {
-        "id": "switch.a1_03919d4c1900016_enable_camera",
-        "title": "Принтер_BambuLab Camera",
-        "type": "switch"
-      },
-      {
-        "id": "switch.a1_03919d4c1900016_use_image_sensor_camera",
-        "title": "Принтер_BambuLab Image sensor camera",
-        "type": "switch"
-      },
-      {
-        "id": "switch.a1_03919d4c1900016_allow_prompt_sound",
-        "title": "Принтер_BambuLab Prompt sound",
-        "type": "switch"
-      }
-    ],
-    "automations": []
   },
   "rasteniia": {
     "title": "Растения",
@@ -912,6 +885,7 @@
         "type": "switch"
       }
     ],
+    "status": [],
     "automations": [
       {
         "id": "automation.rasteniia_vykliuchit",
@@ -923,16 +897,6 @@
     "title": "Сервер",
     "icon": "🖥",
     "entities": [
-      {
-        "id": "binary_sensor.unknown",
-        "title": "binary_sensor.unknown",
-        "type": "binary_sensor"
-      },
-      {
-        "id": "binary_sensor.musorka_door",
-        "title": "Дверь серверная Дверь",
-        "type": "binary_sensor"
-      },
       {
         "id": "light.esp32_4848s040_t1_display_backlight",
         "title": "ESP32-экран Display Backlight",
@@ -1074,6 +1038,18 @@
         "type": "switch"
       }
     ],
+    "status": [
+      {
+        "id": "binary_sensor.unknown",
+        "title": "binary_sensor.unknown",
+        "type": "binary_sensor"
+      },
+      {
+        "id": "binary_sensor.musorka_door",
+        "title": "Дверь серверная Дверь",
+        "type": "binary_sensor"
+      }
+    ],
     "automations": [
       {
         "id": "automation.taimer_kamery_podezd",
@@ -1085,16 +1061,6 @@
     "title": "Спальня",
     "icon": "🛏",
     "entities": [
-      {
-        "id": "binary_sensor.wifishui_jin_chuan_gan_qi_moisture",
-        "title": "Вода спальня Wifi Влага",
-        "type": "binary_sensor"
-      },
-      {
-        "id": "binary_sensor.dvizhenie_spalnia_motion",
-        "title": "движение спальня Движение",
-        "type": "binary_sensor"
-      },
       {
         "id": "fan.zhimi_ma2_5e25_air_purifier",
         "title": "Очиститель воздуха Air Purifier",
@@ -1211,6 +1177,18 @@
         "type": "switch"
       }
     ],
+    "status": [
+      {
+        "id": "binary_sensor.wifishui_jin_chuan_gan_qi_moisture",
+        "title": "Вода спальня Wifi Влага",
+        "type": "binary_sensor"
+      },
+      {
+        "id": "binary_sensor.dvizhenie_spalnia_motion",
+        "title": "движение спальня Движение",
+        "type": "binary_sensor"
+      }
+    ],
     "automations": [
       {
         "id": "automation.podsvetka_rastenii_vkliuchit",
@@ -1227,21 +1205,6 @@
     "icon": "🌳",
     "entities": [
       {
-        "id": "binary_sensor.nvt_cell_motion_detection",
-        "title": "NVT Cell Motion Detection",
-        "type": "binary_sensor"
-      },
-      {
-        "id": "binary_sensor.nvt_motion_alarm",
-        "title": "NVT Motion Alarm",
-        "type": "binary_sensor"
-      },
-      {
-        "id": "binary_sensor.nvt_tamper_detection",
-        "title": "NVT Tamper Detection",
-        "type": "binary_sensor"
-      },
-      {
         "id": "switch.nvt_autofocus",
         "title": "NVT Автофокус",
         "type": "switch"
@@ -1257,22 +1220,29 @@
         "type": "switch"
       }
     ],
+    "status": [
+      {
+        "id": "binary_sensor.nvt_cell_motion_detection",
+        "title": "NVT Cell Motion Detection",
+        "type": "binary_sensor"
+      },
+      {
+        "id": "binary_sensor.nvt_motion_alarm",
+        "title": "NVT Motion Alarm",
+        "type": "binary_sensor"
+      },
+      {
+        "id": "binary_sensor.nvt_tamper_detection",
+        "title": "NVT Tamper Detection",
+        "type": "binary_sensor"
+      }
+    ],
     "automations": []
   },
   "vannaia": {
     "title": "Ванная",
     "icon": "🛁",
     "entities": [
-      {
-        "id": "binary_sensor.esp8266",
-        "title": "Ванная счетчики Контактный датчик",
-        "type": "binary_sensor"
-      },
-      {
-        "id": "binary_sensor.wifishui_jin_chuan_gan_qi_3_moisture",
-        "title": "Вода счетчики Wifi Влага",
-        "type": "binary_sensor"
-      },
       {
         "id": "climate.sonoff_1000a91ff6",
         "title": "Вытяжка",
@@ -1384,6 +1354,18 @@
         "type": "switch"
       }
     ],
+    "status": [
+      {
+        "id": "binary_sensor.esp8266",
+        "title": "Ванная счетчики Контактный датчик",
+        "type": "binary_sensor"
+      },
+      {
+        "id": "binary_sensor.wifishui_jin_chuan_gan_qi_3_moisture",
+        "title": "Вода счетчики Wifi Влага",
+        "type": "binary_sensor"
+      }
+    ],
     "automations": [
       {
         "id": "automation.vannaia_vytiazhka",
@@ -1416,21 +1398,6 @@
     "icon": "🏠",
     "entities": [
       {
-        "id": "binary_sensor.vkhodnaia_dver_2_cell_motion_detection",
-        "title": "Входная дверь_2 Cell Motion Detection",
-        "type": "binary_sensor"
-      },
-      {
-        "id": "binary_sensor.vkhodnaia_dver_2_motion_alarm",
-        "title": "Входная дверь_2 Motion Alarm",
-        "type": "binary_sensor"
-      },
-      {
-        "id": "binary_sensor.vkhodnaia_dver_2_tamper_detection",
-        "title": "Входная дверь_2 Tamper Detection",
-        "type": "binary_sensor"
-      },
-      {
         "id": "switch.vkhodnaia_dver_2_autofocus",
         "title": "Входная дверь_2 Автофокус",
         "type": "switch"
@@ -1444,6 +1411,23 @@
         "id": "switch.vkhodnaia_dver_2_wiper",
         "title": "Входная дверь_2 Стеклоочиститель",
         "type": "switch"
+      }
+    ],
+    "status": [
+      {
+        "id": "binary_sensor.vkhodnaia_dver_2_cell_motion_detection",
+        "title": "Входная дверь_2 Cell Motion Detection",
+        "type": "binary_sensor"
+      },
+      {
+        "id": "binary_sensor.vkhodnaia_dver_2_motion_alarm",
+        "title": "Входная дверь_2 Motion Alarm",
+        "type": "binary_sensor"
+      },
+      {
+        "id": "binary_sensor.vkhodnaia_dver_2_tamper_detection",
+        "title": "Входная дверь_2 Tamper Detection",
+        "type": "binary_sensor"
       }
     ],
     "automations": []
@@ -1483,6 +1467,7 @@
         "type": "switch"
       }
     ],
+    "status": [],
     "automations": [
       {
         "id": "automation.zal_uvlazhnitel_vykliuchit",
@@ -1507,6 +1492,630 @@
       {
         "id": "automation.test_zal_2",
         "title": "Светильник в зале выключить"
+      }
+    ]
+  },
+  "obshchee": {
+    "title": "Общие",
+    "icon": "⚙️",
+    "entities": [],
+    "status": [],
+    "automations": [
+      {
+        "id": "automation.voda_krany_test_po_voskresene",
+        "title": "0. вода краны тест по воскресенье"
+      },
+      {
+        "id": "automation.1_sv",
+        "title": "1 св"
+      },
+      {
+        "id": "automation.1_1_voda_srabotali_datchiki_batarei",
+        "title": "1.1 Вода \"Сработали датчики Батареи\""
+      },
+      {
+        "id": "automation.voda_datchiki_vannaia_i_rakovina_perekrytie",
+        "title": "1.Вода \"Сработали датчики воды\" перекрытие общее"
+      },
+      {
+        "id": "automation.1svv",
+        "title": "1свв"
+      },
+      {
+        "id": "automation.voda_uvedomlenie_goriachaia_voda_otkryta",
+        "title": "2. Вода \" Уведомление Горячая вода открыта\""
+      },
+      {
+        "id": "automation.220_propalo_vkliuchit_podsvetku_rasteniia",
+        "title": "220 пропало включить подсветку растения"
+      },
+      {
+        "id": "automation.voda_uvedomlenie_kholodnaia_voda_otkryta",
+        "title": "3. Вода \" Уведомление Холодная вода открыта\""
+      },
+      {
+        "id": "automation.voda_uvedomlenie_goriachaia_voda_perekryta",
+        "title": "4. Вода \"уведомление Горячая вода перекрыта\""
+      },
+      {
+        "id": "automation.voda_uvedomlenie_kholodnaia_voda_perekryta",
+        "title": "5. Вода \"Уведомление Холодная вода перекрыта\""
+      },
+      {
+        "id": "automation.test",
+        "title": "T - Кнопка 1 \"Звонок\" Одно нажатие"
+      },
+      {
+        "id": "automation.xa_perezapusk",
+        "title": "XA перезапуск"
+      },
+      {
+        "id": "automation.alisa_ubrat_koridor",
+        "title": "А - Алиса \"Убрать коридор\""
+      },
+      {
+        "id": "automation.a_alisa_ubrat_za_mishei",
+        "title": "А - Алиса \"убрать за Мишей\""
+      },
+      {
+        "id": "automation.a_alisa_ubrat_gostinuiu",
+        "title": "А - Алиса \"убрать зал\""
+      },
+      {
+        "id": "automation.a_alisa_ubrat_kabinet",
+        "title": "А - Алиса \"убрать кабинет\""
+      },
+      {
+        "id": "automation.a_alisa_ubrat_kukhnia",
+        "title": "А - Алиса \"убрать кухня\""
+      },
+      {
+        "id": "automation.alisa_ubrat_prikhozhuiu",
+        "title": "А - Алиса \"убрать прихожую\""
+      },
+      {
+        "id": "automation.a_alisa_ubrat_spalnia",
+        "title": "А - Алиса \"убрать спальня\""
+      },
+      {
+        "id": "automation.a_alisa_ubrat_stol_kabinet",
+        "title": "А - Алиса \"убрать стол кабинет\""
+      },
+      {
+        "id": "automation.a_foto_ot_alisy",
+        "title": "А - фото для Алисы"
+      },
+      {
+        "id": "automation.a_aaa_zhest",
+        "title": "А- Ааа Жесть"
+      },
+      {
+        "id": "automation.alisa_tualet",
+        "title": "Алиса туалет"
+      },
+      {
+        "id": "automation.alisa_tualet_2",
+        "title": "Алиса туалет 2"
+      },
+      {
+        "id": "automation.alisa_tualet_3",
+        "title": "Алиса туалет 3"
+      },
+      {
+        "id": "automation.1_test_vannaia_vykl",
+        "title": "Ванная свет выключить"
+      },
+      {
+        "id": "automation.vkliuchit_girliandy",
+        "title": "Включить гирлянды"
+      },
+      {
+        "id": "automation.vkliuchit_svet_rasteniia",
+        "title": "Включить свет растения"
+      },
+      {
+        "id": "automation.vykliuchit_svet_v_kvartire_po_ukhodu",
+        "title": "Выключить свет в квартире по уходу"
+      },
+      {
+        "id": "automation.vykliuchit_svet_v_kvartire_po_ukhodu_okno",
+        "title": "Выключить свет в квартире по уходу (окно)"
+      },
+      {
+        "id": "automation.vykliuchit_svet_noch",
+        "title": "Выключить свет ночь"
+      },
+      {
+        "id": "automation.girlianda_vecher_vykliuchit_2_00",
+        "title": "Гирлянда вечер выключить 2.00"
+      },
+      {
+        "id": "automation.girlianda_vkliuchit_v_16_00",
+        "title": "Гирлянда включить в 16.00"
+      },
+      {
+        "id": "automation.girlianda_spalnia_balkon_vykliuchit",
+        "title": "Гирлянда спальня балкон выключить"
+      },
+      {
+        "id": "automation.girliandy_vykliuchit",
+        "title": "Гирлянды выключить"
+      },
+      {
+        "id": "automation.zal_podsvetka_rastenii_vkliuchit",
+        "title": "Зал подсветка окна включить"
+      },
+      {
+        "id": "automation.zal_podsvetka_rastenii_vykliuchit_s_8_do_19",
+        "title": "Зал подсветка окна выключить"
+      },
+      {
+        "id": "automation.zal_podsvetka_okna_vykliuchit_vykhodnoi",
+        "title": "Зал подсветка окна выключить Выходной"
+      },
+      {
+        "id": "automation.zal_torsher_vykliuchit",
+        "title": "Зал торшер выключить"
+      },
+      {
+        "id": "automation.kabinet_liustra_vkl_vykl",
+        "title": "Кабинет \"Люстра вкл/выкл\""
+      },
+      {
+        "id": "automation.kabinet_svetilnik_vkl_vykl",
+        "title": "Кабинет \"светильник вкл/выкл)"
+      },
+      {
+        "id": "automation.test_2",
+        "title": "Кабинет \"светильник яркость увеличить\""
+      },
+      {
+        "id": "automation.kabinet_svetilnik_iarkost_umenshit",
+        "title": "Кабинет \"светильник яркость уменьшить\""
+      },
+      {
+        "id": "automation.kabinet_vecher_test",
+        "title": "Кабинет включить"
+      },
+      {
+        "id": "automation.kabinet_vecher_vykliuchit",
+        "title": "Кабинет выключить мониторы"
+      },
+      {
+        "id": "automation.kabinet_datchik_prisutstviia_vkliuchit_s_18_do_6",
+        "title": "Кабинет датчик присутствия Включить с 18 до 6 светильник"
+      },
+      {
+        "id": "automation.kabinet_datchik_prisutstviia_vkliuchit",
+        "title": "Кабинет датчик присутствия Включить светильник с 6 до 18"
+      },
+      {
+        "id": "automation.kabinet_datchik_prisutstviia_vykliuchit",
+        "title": "Кабинет датчик присутствия выключить"
+      },
+      {
+        "id": "automation.kabinet_podsvetka_rastenii",
+        "title": "Кабинет подсветка растений"
+      },
+      {
+        "id": "automation.kabinet_pylesos_stol",
+        "title": "Кабинет пылесос стол"
+      },
+      {
+        "id": "automation.kabinet_torsher_smena_tsveta",
+        "title": "Кабинет торшер смена цвета"
+      },
+      {
+        "id": "automation.kabinet_cherep_vkliuchit",
+        "title": "Кабинет череп включить"
+      },
+      {
+        "id": "automation.kabinet_cherep_vykliuchit",
+        "title": "Кабинет череп выключить"
+      },
+      {
+        "id": "automation.taimer_test",
+        "title": "Камера включить"
+      },
+      {
+        "id": "automation.knopka_4_vykliuchit_uvlazhnitel_ventiliator",
+        "title": "Кнопка 4 выключить увлажнитель вентилятор"
+      },
+      {
+        "id": "automation.koridor_vykliuchatel_liustra_koridor",
+        "title": "Коридор выключатель ( Люстра коридор)"
+      },
+      {
+        "id": "automation.koridor_vykliuchatel_liustra_prikhozhaia",
+        "title": "Коридор выключатель ( Люстра прихожая)"
+      },
+      {
+        "id": "automation.koridor_vykliuchatel_vkliuchit_ves_svet",
+        "title": "Коридор выключатель ( выключить весь свет)"
+      },
+      {
+        "id": "automation.koridor_vykliuchatel_levaia_knopka_dvoinoe_nazhatie_vkl_svetilniki",
+        "title": "Коридор выключатель левая кнопка (двойное нажатие) вкл светильники на 5 мин"
+      },
+      {
+        "id": "automation.koridor_vykliuchatel_pravaia_knopka_dvoinoe_nazhatie_vykl_svetilniki",
+        "title": "Коридор выключатель правая кнопка (двойное нажатие) выкл светильники"
+      },
+      {
+        "id": "automation.koridor_vykliuchit_liustru",
+        "title": "Коридор выключить люстру"
+      },
+      {
+        "id": "automation.koridor_podsvetka_rastenii",
+        "title": "Коридор подсветка растений"
+      },
+      {
+        "id": "automation.kukhnia_vecher_vkl_podsvetku_i_televizor",
+        "title": "Кухня вечер вкл подсветку до 23.30"
+      },
+      {
+        "id": "automation.kukhnia_vecher_vkl_televizor_i_svetilnik",
+        "title": "Кухня вечер вкл светильник"
+      },
+      {
+        "id": "automation.kukhnia_vkl_televizor_i_vytiazhka",
+        "title": "Кухня вкл вытяжка"
+      },
+      {
+        "id": "automation.kukhnia_vkl_televizor",
+        "title": "Кухня вкл телевизор"
+      },
+      {
+        "id": "automation.kukhnia_vykliuchit_televizor_i_svet",
+        "title": "Кухня выключить телевизор и Свет, вытяжка"
+      },
+      {
+        "id": "automation.kukhnia_musorka_vkliuchit_svet",
+        "title": "Кухня мусорка включить свет"
+      },
+      {
+        "id": "automation.kukhnia_musorka_vykliuchit_svet_cherez_5_min",
+        "title": "Кухня мусорка выключить свет через 5 мин"
+      },
+      {
+        "id": "automation.napriazhenie_propalo_vykliuchit_rasteniia",
+        "title": "Напряжение пропало выключить растения"
+      },
+      {
+        "id": "automation.nasos_vkliuchit",
+        "title": "Насос включить"
+      },
+      {
+        "id": "automation.nasos_uvlazhnitel_vykliuchit",
+        "title": "Насос выключить"
+      },
+      {
+        "id": "automation.novaia_avtomatizatsiia",
+        "title": "Ночник на ночь выключить"
+      },
+      {
+        "id": "automation.oplata_vody",
+        "title": "Оплата воды"
+      },
+      {
+        "id": "automation.podsvetka_printera_vkliuchit",
+        "title": "Подсветка принтера включить"
+      },
+      {
+        "id": "automation.podsvetka_rastenii_vkliuchit_v_9_00",
+        "title": "Подсветка растений включить в 9.00"
+      },
+      {
+        "id": "automation.podsvetka_rastenii_vykliuchit_19_00",
+        "title": "Подсветка растений выключить 19.00"
+      },
+      {
+        "id": "automation.podezd_otkryt",
+        "title": "Подъезд открыт"
+      },
+      {
+        "id": "automation.podezd_rastenie_vkliuchit",
+        "title": "Подъезд растение включить"
+      },
+      {
+        "id": "automation.podezd_rastenie_vykliuchit",
+        "title": "Подъезд растение выключить"
+      },
+      {
+        "id": "automation.printer_a1_vse",
+        "title": "Принтер А1 все"
+      },
+      {
+        "id": "automation.prikhozhaia_vecher_vkliuchit_svetilnik_na_5_min",
+        "title": "Прихожая вечер включить светильник на 5 мин"
+      },
+      {
+        "id": "automation.prikhozhaia_vkliuchit_panel",
+        "title": "Прихожая включить панель"
+      },
+      {
+        "id": "automation.shlagbaum_vezd",
+        "title": "Прихожая выключатель левая кнопка (двойное нажатие) Шлагбаум въезд"
+      },
+      {
+        "id": "automation.koridor_vykliuchatel_pravaia_knopka_odno_nazhatie_vykl_vkl_svetilnik",
+        "title": "Прихожая выключатель левая кнопка (одно нажатие) выкл/вкл светильник"
+      },
+      {
+        "id": "automation.shlagbaum_vyezd",
+        "title": "Прихожая выключатель правая кнопка (двойное нажатие) Шлагбаум выезд"
+      },
+      {
+        "id": "automation.a_knopka_2_vykliuchit_vse",
+        "title": "Прихожая выключатель правая кнопка (длинное нажатие) выкл свет"
+      },
+      {
+        "id": "automation.prikhozhaia_vykliuchit_liustru",
+        "title": "Прихожая выключить люстру"
+      },
+      {
+        "id": "automation.prikhozhaia_panel_vykliuchit",
+        "title": "Прихожая панель выключить"
+      },
+      {
+        "id": "automation.propal_internet_pokrov",
+        "title": "Пропал интернет Покров"
+      },
+      {
+        "id": "automation.svet_servernaia_vkliuchit",
+        "title": "Свет серверная включить"
+      },
+      {
+        "id": "automation.svet_servernaia_vykliuchit",
+        "title": "Свет серверная выключить"
+      },
+      {
+        "id": "automation.servernaia_monitor_vkliuchit",
+        "title": "Серверная монитор включить"
+      },
+      {
+        "id": "automation.servernaia_monitor_vykliuchit",
+        "title": "Серверная монитор выключить"
+      },
+      {
+        "id": "automation.so2_550",
+        "title": "Со2 550"
+      },
+      {
+        "id": "automation.so2_vyshe_800",
+        "title": "Со2 выше 800"
+      },
+      {
+        "id": "automation.spalnia_uvlazhnitel_vkliuchit_s_50",
+        "title": "Спальня «увлажнитель включить с 45%»"
+      },
+      {
+        "id": "automation.spalnia_uvlazhnitel_vykliuchit_na_70",
+        "title": "Спальня «увлажнитель выключить на 60%»"
+      },
+      {
+        "id": "automation.spalnia_okno_zakryt",
+        "title": "Спальня окно закрыть меньше 19с"
+      },
+      {
+        "id": "automation.spalnia_okno_otkryt",
+        "title": "Спальня окно открыть больше 20"
+      },
+      {
+        "id": "automation.spalnia_uvlazhnitel_vykliuchit_8_00",
+        "title": "Спальня увлажнитель выключить 8.30"
+      },
+      {
+        "id": "automation.schitana_metka_1",
+        "title": "Считывать метку 1"
+      },
+      {
+        "id": "automation.telefon_lery_kukhnia",
+        "title": "Телефон Леры кухня"
+      },
+      {
+        "id": "automation.test_zvuk",
+        "title": "Тест звук"
+      },
+      {
+        "id": "automation.test_kukhnia",
+        "title": "Тест кухня"
+      },
+      {
+        "id": "automation.220_poiavilos",
+        "title": "Уведомление  \"220 появилось\""
+      },
+      {
+        "id": "automation.220_propalo",
+        "title": "Уведомление \"220 пропало\""
+      },
+      {
+        "id": "automation.uvedomlenie_andrei_doma",
+        "title": "Уведомление \"Андрей дома\""
+      },
+      {
+        "id": "automation.ne_doma",
+        "title": "Уведомление \"Андрей не дома\""
+      },
+      {
+        "id": "automation.uvedomlenie_valeriia_doma",
+        "title": "Уведомление \"Валерия дома\""
+      },
+      {
+        "id": "automation.uvedomlenie_valeriia_ne_doma",
+        "title": "Уведомление \"Валерия не дома\" запустить пылесос"
+      },
+      {
+        "id": "automation.uvedomlenie_poiavilsia_internet_v_shkole",
+        "title": "Уведомление \"Появился интернет в ШКОЛЕ\""
+      },
+      {
+        "id": "automation.uvedomlenie_propal_internet_v_shkole",
+        "title": "Уведомление \"Пропал интернет в ШКОЛЕ\""
+      },
+      {
+        "id": "automation.uvedomlenie_est_internet",
+        "title": "Уведомление \"есть интернет\""
+      },
+      {
+        "id": "automation.doma",
+        "title": "Уведомление \"нет интернета\""
+      },
+      {
+        "id": "automation.skolko_ia_proshla",
+        "title": "Уведомление \"сколько я прошла\""
+      },
+      {
+        "id": "automation.uvedomlenie_telefon_lery",
+        "title": "Уведомление \"телефон Леры на зарядку\""
+      },
+      {
+        "id": "automation.uvedomlenie_obnovleniia",
+        "title": "Уведомление обновления"
+      },
+      {
+        "id": "automation.uvedomlenie_prishli_v_kvartiru",
+        "title": "Уведомление пришли в квартиру"
+      },
+      {
+        "id": "automation.uvedomlenie_temperatury_v_servernoi",
+        "title": "Уведомление температуры в серверной"
+      },
+      {
+        "id": "automation.uvedomlenie_shlagbaum",
+        "title": "Уведомление шлагбаум"
+      },
+      {
+        "id": "automation.vesy",
+        "title": "весы"
+      },
+      {
+        "id": "automation.voda_uvedomlenie_datchik_batareia_kabinet",
+        "title": "вода \"Уведомление датчик батарея Кабинет\""
+      },
+      {
+        "id": "automation.voda_uvedomlenie_datchik_zal_batareia",
+        "title": "вода \"Уведомление датчик батарея зал\""
+      },
+      {
+        "id": "automation.voda_datchik_batareia_kukhnia",
+        "title": "вода \"Уведомление датчик батарея кухня\""
+      },
+      {
+        "id": "automation.voda_uvedomlenie_datchik_batareia_spalnia",
+        "title": "вода \"Уведомление датчик батарея спальня\""
+      },
+      {
+        "id": "automation.voda_datchik_vannaia",
+        "title": "вода \"Уведомление датчик пол кухня\""
+      },
+      {
+        "id": "automation.voda_datchik_rakovina_kukhnia",
+        "title": "вода \"Уведомление датчик раковина кухня\""
+      },
+      {
+        "id": "automation.voda_uvedomlenie_datchik_stiralnaia_mashina_vannaia",
+        "title": "вода \"Уведомление датчик стиральная машина ванная\""
+      },
+      {
+        "id": "automation.voda_uvedomlenie_datchik_schetchik_vannaia",
+        "title": "вода \"Уведомление датчик счетчик ванная\""
+      },
+      {
+        "id": "automation.voda_uvedomlenie_datchik_tualet_vannaia",
+        "title": "вода \"Уведомление датчик туалет ванная\""
+      },
+      {
+        "id": "automation.voda_test",
+        "title": "вода тест"
+      },
+      {
+        "id": "automation.vykliuchit_ves_svet_avto",
+        "title": "выключить весь свет авто"
+      },
+      {
+        "id": "automation.girlianda_noch",
+        "title": "гирлянда ночь включить"
+      },
+      {
+        "id": "automation.girlianda_noch_vykliuchit",
+        "title": "гирлянда ночь выключить"
+      },
+      {
+        "id": "automation.kabinet_podsvetka_kub",
+        "title": "кабинет подсветка  куб"
+      },
+      {
+        "id": "automation.test_belyi",
+        "title": "кабинет тест белый"
+      },
+      {
+        "id": "automation.kamera_vkhodnaia_dver_dvizhenie",
+        "title": "камера входная дверь движение"
+      },
+      {
+        "id": "automation.opustit_ekran_av",
+        "title": "опустить экран ав"
+      },
+      {
+        "id": "automation.rezervnaia_kopiia",
+        "title": "резервная копия"
+      },
+      {
+        "id": "automation.svet_schetchiki_vkliuchit",
+        "title": "свет счетчики включить"
+      },
+      {
+        "id": "automation.svet_schetchiki_vykliuchit",
+        "title": "свет счетчики выключить"
+      },
+      {
+        "id": "automation.spalnia_18_00_otkryt_okno",
+        "title": "спальня 18.00 открыть окно"
+      },
+      {
+        "id": "automation.spalnia_19_00_zakryt_okno",
+        "title": "спальня 19.00 закрыть окно"
+      },
+      {
+        "id": "automation.spalnia_girlianda_stena",
+        "title": "спальня Гирлянда стена"
+      },
+      {
+        "id": "automation.spalnia_vykliuchit_vse_dlinnoe_nazhatie",
+        "title": "спальня выключить все (длинное нажатие)"
+      },
+      {
+        "id": "automation.spalnia_okno_otk_zakr_dvoinoe_nazhatie",
+        "title": "спальня окно отк/закр (двойное нажатие)"
+      },
+      {
+        "id": "automation.spalnia_uvlazhnitel_vkliuchit_19_00",
+        "title": "спальня очиститель включить 19.00"
+      },
+      {
+        "id": "automation.spalnia_proektor_vkl_vykl",
+        "title": "спальня проектор вкл/выкл"
+      },
+      {
+        "id": "automation.test_1",
+        "title": "тест 1"
+      },
+      {
+        "id": "automation.test_2_2",
+        "title": "тест 2"
+      },
+      {
+        "id": "automation.test_3",
+        "title": "тест 3"
+      },
+      {
+        "id": "automation.test_4",
+        "title": "тест 4"
+      },
+      {
+        "id": "automation.kholodilnik",
+        "title": "холодильник"
       }
     ]
   }
