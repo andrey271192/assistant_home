@@ -22,11 +22,16 @@ DISABLE_OPENAPI = PRODUCTION
 PUBLIC_BASE_URL = (os.getenv("PUBLIC_BASE_URL", "http://127.0.0.1:8010") or "").rstrip("/")
 
 TELEGRAM_TOKEN = (os.getenv("TELEGRAM_TOKEN", "") or "").strip()
+# Mini App: Telegram *user* id (в личке часто совпадает с chat_id). TELEGRAM_CHAT_ID — синоним.
+_allowed_raw = (os.getenv("TELEGRAM_ALLOWED_IDS", "") or "").strip()
+_chat_id = (os.getenv("TELEGRAM_CHAT_ID", "") or "").strip().strip('"').strip("'")
 TELEGRAM_ALLOWED_IDS = [
-    x.strip()
-    for x in (os.getenv("TELEGRAM_ALLOWED_IDS", "") or "").split(",")
+    x.strip().strip('"').strip("'")
+    for x in _allowed_raw.split(",")
     if x.strip()
 ]
+if _chat_id and _chat_id not in TELEGRAM_ALLOWED_IDS:
+    TELEGRAM_ALLOWED_IDS.append(_chat_id)
 TELEGRAM_PIN = (os.getenv("TELEGRAM_PIN", "") or "").strip()
 TELEGRAM_PIN_SESSION_HOURS = float(os.getenv("TELEGRAM_PIN_SESSION_HOURS", "12") or "12")
 
